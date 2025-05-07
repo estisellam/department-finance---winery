@@ -24,7 +24,7 @@ CREATE TABLE salary
   FOREIGN KEY (e_id) REFERENCES employee(e_id)
 );
 
-CREATE TABLE tasxes
+CREATE TABLE taxes
 (
   t_id NUMERIC(3) NOT NULL,
   t_percent INT NOT NULL,
@@ -70,13 +70,13 @@ CREATE TABLE payment
   FOREIGN KEY (e_id) REFERENCES employee(e_id)
 );
 
-CREATE TABLE out_tasxes
+CREATE TABLE out_taxes
 (
   p_id NUMERIC(3) NOT NULL,
   t_id NUMERIC(3) NOT NULL,
   PRIMARY KEY (p_id, t_id),
   FOREIGN KEY (p_id) REFERENCES payment(p_id),
-  FOREIGN KEY (t_id) REFERENCES tasxes(t_id)
+  FOREIGN KEY (t_id) REFERENCES taxes(t_id)
 );
 
 CREATE TABLE in_Purchases_from

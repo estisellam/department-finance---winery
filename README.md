@@ -1,3 +1,4 @@
+
 # מחלקת כספים - פרויקט בסיסי נתונים
 
 **שמות המגישות:**  
@@ -46,13 +47,13 @@
 
 ## תרשים ERD
 
-![ERD](%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png)
+![ERD](שלב%20א/ERD.png)
 
 ---
 
 ## תרשים DSD
 
-![DSD](%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png)
+![DSD](שלב%20א/DSD.png)
 
 ---
 
@@ -69,18 +70,24 @@
 
 ## שיטות הכנסת נתונים
 
-### 1. שימוש ב־[Mockaroo](https://mockaroo.com/)
-![Mockaroo](PHOTO-2025-05-02-02-02-23.jpg)
+### 1. שימוש ב־Mockaroo
+
+![Mockaroo](שלב%20א/mockaroo.png)
 
 ### 2. שימוש ב־GENERATEDATA
-(העלו קבצים בתיקיית `generatedataFiles/`)
 
-### 3. כתיבת סקריפט ב־Python
-(הקובץ נמצא בתיקיית `script in python/`)
+![GENERATEDATA](שלב%20א/generatedata.png)
+
+### 3. סקריפט ב־Python
+
+![Python Script](שלב%20א/python_script.png)
 
 ---
 
 ## גיבוי ושחזור נתונים
+
+![Backup](שלב%20א/backup.png)
+![Restore](שלב%20א/restore.png)
 
 **קובץ הגיבוי:** `gibuy.sql`  
 **קובץ השחזור:** `insertTables.sql`  
@@ -89,5 +96,3 @@
 ---
 
 *הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*
-
-

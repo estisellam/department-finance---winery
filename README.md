@@ -46,13 +46,13 @@
 
 ## תרשים ERD
 
-![ERD](ERD.png)
+![ERD](%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png)
 
 ---
 
 ## תרשים DSD
 
-![DSD](DSD.png)
+![DSD](%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png)
 
 ---
 

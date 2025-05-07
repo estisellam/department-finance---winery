@@ -47,13 +47,13 @@
 
 ## תרשים ERD
 
-![ERD](שלב%20א/ERD.png)
+![ERD](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png?raw=true)
 
 ---
 
 ## תרשים DSD
 
-![DSD](שלב%20א/DSD.png)
+![DSD](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png?raw=true)
 
 ---
 
@@ -72,22 +72,21 @@
 
 ### 1. שימוש ב־Mockaroo
 
-![Mockaroo](שלב%20א/mockaroo.png)
+[mockarooFiles](https://github.com/estisellam/department-finance---winery/tree/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/mockarooFiles)
 
 ### 2. שימוש ב־GENERATEDATA
 
-![GENERATEDATA](שלב%20א/generatedata.png)
+[generatedataFiles](https://github.com/estisellam/department-finance---winery/tree/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/generatedataFiles)
 
 ### 3. סקריפט ב־Python
 
-![Python Script](שלב%20א/python_script.png)
+[scripts folder](https://github.com/estisellam/department-finance---winery/tree/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/python_script)
 
 ---
 
 ## גיבוי ושחזור נתונים
 
-![Backup](שלב%20א/backup.png)
-![Restore](שלב%20א/restore.png)
+![Backup](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202025-05-02%20%D7%91-9.34.22.png?raw=true)
 
 **קובץ הגיבוי:** `gibuy.sql`  
 **קובץ השחזור:** `insertTables.sql`  

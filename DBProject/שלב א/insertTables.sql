@@ -13,10 +13,10 @@ INSERT INTO salary (neto_salary, payslip_number, down, e_id) VALUES (45000, 201,
 INSERT INTO salary (neto_salary, payslip_number, down, e_id) VALUES (50000, 202, 10000, 102);
 INSERT INTO salary (neto_salary, payslip_number, down, e_id) VALUES (38000, 203, 10000, 103);
 
--- הכנסת נתונים לטבלת tasxes
-INSERT INTO tasxes (t_id, t_percent, TaxName, principal_amount) VALUES (1, 15, 1000, 15000);
-INSERT INTO tasxes (t_id, t_percent, TaxName, principal_amount) VALUES (2, 20, 1200, 20000);
-INSERT INTO tasxes (t_id, t_percent, TaxName, principal_amount) VALUES (3, 25, 1300, 25000);
+-- הכנסת נתונים לטבלת taxes
+INSERT INTO taxes (t_id, t_percent, TaxName, principal_amount) VALUES (1, 15, 1000, 15000);
+INSERT INTO taxes (t_id, t_percent, TaxName, principal_amount) VALUES (2, 20, 1200, 20000);
+INSERT INTO taxes (t_id, t_percent, TaxName, principal_amount) VALUES (3, 25, 1300, 25000);
 
 -- הכנסת נתונים לטבלת Investments
 INSERT INTO Investments (id_Investor, name_Investor, profit_Percentage) VALUES (301, 'David', 5);
@@ -38,10 +38,10 @@ INSERT INTO payment (p_id, p_date, in_or_out, p_sum, p_year, e_id) VALUES (601, 
 INSERT INTO payment (p_id, p_date, in_or_out, p_sum, p_year, e_id) VALUES (602, '2024-06-15', 'OUT', 15000, 2024, 102);
 INSERT INTO payment (p_id, p_date, in_or_out, p_sum, p_year, e_id) VALUES (603, '2025-09-21', 'IN', 25000, 2025, 103);
 
--- הכנסת נתונים לטבלת out_tasxes
-INSERT INTO out_tasxes (p_id, t_id) VALUES (601, 1);
-INSERT INTO out_tasxes (p_id, t_id) VALUES (602, 2);
-INSERT INTO out_tasxes (p_id, t_id) VALUES (603, 3);
+-- הכנסת נתונים לטבלת out_taxes
+INSERT INTO out_taxes (p_id, t_id) VALUES (601, 1);
+INSERT INTO out_taxes (p_id, t_id) VALUES (602, 2);
+INSERT INTO out_taxes (p_id, t_id) VALUES (603, 3);
 
 -- הכנסת נתונים לטבלת in_Purchases_from
 INSERT INTO in_Purchases_from (p_id, id_Consumer) VALUES (601, 501);

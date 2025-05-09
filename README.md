@@ -263,28 +263,30 @@ COMMIT;
 
 ---
 
-## 🔹 אילוצים (Constraints)
-
-### 1. NOT NULL על employee.e_name
+### 1. NOT NULL על תאריך בתשלומים (payment.p_date)
 ```sql
-ALTER TABLE employee
-ALTER COLUMN e_name SET NOT NULL;
+ALTER TABLE payment
+ALTER COLUMN p_date SET NOT NULL;
 
 -- ניסיון הפרה
-INSERT INTO employee (e_id, e_name, job_start_date, salary)
-VALUES (777, NULL, '2022-01-01', 8000);
+INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
+VALUES (501, NULL, 5000, 'in');
 ```
 
-### 2. CHECK על neto_salary <= salary
+---
+
+### 2. CHECK – סכום תשלום גדול מאפס (payment.p_sum > 0)
 ```sql
-ALTER TABLE salary
-ADD CONSTRAINT check_net_salary
-CHECK (neto_salary <= salary);
+ALTER TABLE payment
+ADD CONSTRAINT check_positive_payment
+CHECK (p_sum > 0);
 
 -- ניסיון הפרה
-INSERT INTO salary (e_id, neto_salary)
-VALUES (1, 999999);
+INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
+VALUES (502, '2023-01-01', 0, 'in');
 ```
+
+---
 
 ### 3. DEFAULT על taxes.percent
 ```sql
@@ -294,6 +296,8 @@ ALTER COLUMN percent SET DEFAULT 17;
 -- בדיקה
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
+```
+
 ```
 
 *הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*

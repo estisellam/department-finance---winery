@@ -93,7 +93,6 @@
 בוצע שימוש ב־pgAdmin לייצוא ושחזור הנתונים.
 
 ---
-
 # דוח פרויקט – שלב ב
 
 ## 🔹 שאילתות SELECT
@@ -106,8 +105,23 @@ NATURAL JOIN payment p
 NATURAL JOIN in_Investments i
 ORDER BY e.e_name ASC;
 ```
-![הרצה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.47.40-2%202025-05-09%20update%201.png?raw=true)  
-![תוצאה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.59.05-2%202025-05-09%20update%202.png?raw=true)
+📷 *אין תמונות זמינות כרגע*
+
+---
+
+## 🔹 שאילתות DELETE
+
+### מחיקת רכישות מהיקב שבוצעו לפני 2023
+```sql
+DELETE FROM out_Purchase_for_the_winery
+WHERE p_id IN (
+  SELECT pfw.p_id
+  FROM out_Purchase_for_the_winery pfw
+  NATURAL JOIN payment p
+  WHERE p.p_date < '2023-01-01'
+);
+```
+📷 *אין תמונות זמינות כרגע*
 
 ---
 
@@ -192,6 +206,5 @@ INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
 ![אילוץ 3](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/3%20אילוץ8.19.22-3%202025-05-09%20תמונה.png?raw=true)
-
 
 *הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*

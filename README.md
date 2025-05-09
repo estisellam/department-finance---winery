@@ -239,7 +239,7 @@ WHERE t_id IN (
   SELECT ot.t_id
   FROM out_taxes ot
   NATURAL JOIN payment p
-  WHERE p.year = 2022
+  WHERE p.p_year = 2022
 );
 ```
 

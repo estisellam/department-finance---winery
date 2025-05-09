@@ -248,7 +248,7 @@ WHERE p_id IN (
 );
 ROLLBACK;
 ```
-![]DBProject/שלב ב/delete 1.png
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/delete%201.png)
 
 
 ### 2. מחיקת כל הצרכנים שביצעו פחות מ־2 רכישות
@@ -264,9 +264,7 @@ WHERE id_Consumer IN (
 );
 ROLLBACK;
 ```
-![](DBProject/שלב ב/delete02-before.png)
-![](DBProject/שלב ב/delete02-run.png)
-![](DBProject/שלב ב/delete02-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/delete%202.png)
 
 ### 3. מחיקת צרכנים שלא ביצעו אף רכישה בשנת 2024
 ```sql
@@ -284,9 +282,7 @@ WHERE id_Consumer IN (
 );
 ROLLBACK;
 ```
-![](DBProject/שלב ב/delete03-before.png)
-![](DBProject/שלב ב/delete03-run.png)
-![](DBProject/שלב ב/delete03-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/delete%203.png)
 ## 🔹 אילוצים
 
 ### 1. NOT NULL על תאריך בתשלומים (payment.p_date)

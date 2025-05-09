@@ -48,13 +48,13 @@
 
 ## תרשים ERD
 
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png?raw=true)
+
 
 ---
 
 ## תרשים DSD
 
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png?raw=true)
+
 
 ---
 
@@ -87,7 +87,7 @@
 
 ## גיבוי ושחזור נתונים
 
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202025-05-02%20%D7%91-9.34.22.png?raw=true)
+
 
 **קובץ הגיבוי:** `gibuy.sql`  
 **קובץ השחזור:** `insertTables.sql`  
@@ -96,6 +96,167 @@
 ---
 
 ## שלב ב – שאילתות ועדכונים
+
+
+## 🔹 שאילתות UPDATE
+
+### 1. עדכון אחוז רווח למשקיעים עם תשלום מעל 10,000
+```sql
+UPDATE Investments
+SET profit_Percentage = 15
+WHERE id_Investor IN (
+  SELECT ii.id_Investor
+  FROM in_Investments ii
+  NATURAL JOIN payment p
+  WHERE p.p_sum > 10000
+);
+```
+
+
+
+
+---
+
+### 2. העלאת שכר ב־10% לעובדים עם 3+ תלושי שכר
+```sql
+UPDATE employee
+SET salary = salary * 1.10
+WHERE e_id IN (
+  SELECT e_id
+  FROM salary
+  GROUP BY e_id
+  HAVING COUNT(*) >= 3
+);
+```
+
+
+
+
+---
+
+### 3. הורדת אחוז מס ל־8% עבור תשלומים מ־2022
+```sql
+UPDATE taxes
+SET percent = 8
+WHERE t_id IN (
+  SELECT ot.t_id
+  FROM out_taxes ot
+  NATURAL JOIN payment p
+  WHERE p.p_year = 2022
+);
+```
+
+
+
+
+---
+
+## 🔹 שימוש ב־ROLLBACK
+```sql
+BEGIN;
+UPDATE employee
+SET salary = salary + 123
+WHERE e_id = 200;
+ROLLBACK;
+```
+
+
+
+
+---
+
+## 🔹 שימוש ב־COMMIT
+```sql
+BEGIN;
+UPDATE employee
+SET salary = salary + 123
+WHERE e_id = 200;
+COMMIT;
+```
+
+
+
+
+---
+
+## 🔹 אילוצים
+
+### 1. NOT NULL על תאריך בתשלומים (payment.p_date)
+```sql
+ALTER TABLE payment
+ALTER COLUMN p_date SET NOT NULL;
+
+-- ניסיון הפרה
+INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
+VALUES (501, NULL, 5000, 'in');
+```
+
+
+---
+
+### 2. CHECK – סכום תשלום גדול מאפס (payment.p_sum > 0)
+```sql
+ALTER TABLE payment
+ADD CONSTRAINT check_positive_payment
+CHECK (p_sum > 0);
+
+-- ניסיון הפרה
+INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
+VALUES (502, '2023-01-01', 0, 'in');
+```
+
+
+---
+
+### 3. DEFAULT על taxes.percent
+```sql
+ALTER TABLE taxes
+ALTER COLUMN percent SET DEFAULT 17;
+
+-- בדיקה
+INSERT INTO taxes (t_id, taxname, principal_amount)
+VALUES (999, 'מס ניסיון', 10000);
+```
+
+
+---
+
+
+## 🔹 שאילתות SELECT (1–4)
+
+### 1. עובדים שאחראים על השקעות
+```sql
+SELECT DISTINCT e.e_id, e.e_name
+FROM employee e
+NATURAL JOIN payment p
+NATURAL JOIN in_Investments i
+ORDER BY e.e_name ASC;
+```
+
+### 2. רכישות בתאריך 15.6.2023
+```sql
+SELECT p.p_id, p.p_date, i.id_Consumer
+FROM payment p
+NATURAL JOIN in_Purchases_from i
+WHERE p.p_date = '2023-06-15';
+```
+
+### 3. עובדים שהחלו לעבוד לפני 2020
+```sql
+SELECT e_id, e_name, job_start_date
+FROM employee
+WHERE job_start_date < '2020-01-01'
+ORDER BY job_start_date ASC;
+```
+
+### 4. סכום תשלומים נכנסים לפי שנה
+```sql
+SELECT p_year, SUM(p_sum) AS total_income
+FROM payment
+WHERE in_or_out = 'in'
+GROUP BY p_year
+ORDER BY p_year;
+```
 
 
 ## 🔹 שאילתות UPDATE
@@ -151,6 +312,7 @@ WHERE t_id IN (
 
 ---
 
+
 ## 🔹 שימוש ב־ROLLBACK
 ```sql
 BEGIN;
@@ -165,6 +327,7 @@ ROLLBACK;
 
 ---
 
+
 ## 🔹 שימוש ב־COMMIT
 ```sql
 BEGIN;
@@ -178,6 +341,7 @@ COMMIT;
 ![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/commit-result.png)
 
 ---
+
 
 ## 🔹 אילוצים
 
@@ -220,6 +384,7 @@ VALUES (999, 'מס ניסיון', 10000);
 ![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/constraint3-default.png)
 
 ---
+
 
 ## 🔹 שאילתות SELECT (5–8)
 
@@ -278,6 +443,7 @@ HAVING COUNT(*) < 2;
 
 ---
 
+
 ## 🔹 שאילתות UPDATE
 
 ### 1. עדכון אחוז רווח למשקיעים עם תשלום מעל 10,000
@@ -331,6 +497,7 @@ WHERE t_id IN (
 
 ---
 
+
 ## 🔹 שימוש ב־ROLLBACK
 ```sql
 BEGIN;
@@ -345,6 +512,7 @@ ROLLBACK;
 
 ---
 
+
 ## 🔹 שימוש ב־COMMIT
 ```sql
 BEGIN;
@@ -358,6 +526,7 @@ COMMIT;
 ![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/commit-result.png)
 
 ---
+
 
 ## 🔹 אילוצים
 

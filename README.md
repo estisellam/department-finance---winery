@@ -248,9 +248,8 @@ WHERE p_id IN (
 );
 ROLLBACK;
 ```
-![](DBProject/שלב ב/delete01-before.png)
-![](DBProject/שלב ב/delete01-run.png)
-![](DBProject/שלב ב/delete01-after.png)
+![]DBProject/שלב ב/delete 1.png
+
 
 ### 2. מחיקת כל הצרכנים שביצעו פחות מ־2 רכישות
 

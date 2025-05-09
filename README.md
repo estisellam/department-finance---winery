@@ -1,4 +1,3 @@
-
 # מחלקת כספים - פרויקט בסיסי נתונים
 
 **שמות המגישות:**  
@@ -95,135 +94,11 @@
 
 ---
 
-## שלב ב – שאילתות ועדכונים
-
-
-## 🔹 שאילתות UPDATE
-
-### 1. עדכון אחוז רווח למשקיעים עם תשלום מעל 10,000
-```sql
-UPDATE Investments
-SET profit_Percentage = 15
-WHERE id_Investor IN (
-  SELECT ii.id_Investor
-  FROM in_Investments ii
-  NATURAL JOIN payment p
-  WHERE p.p_sum > 10000
-);
-```
-![לפני](./שלב%20ב/update01-before.png)
-![הרצה](./שלב%20ב/update01-run.png)
-![אחרי](./שלב%20ב/update01-after.png)
-
----
-
-### 2. העלאת שכר ב־10% לעובדים עם 3+ תלושי שכר
-```sql
-UPDATE employee
-SET salary = salary * 1.10
-WHERE e_id IN (
-  SELECT e_id
-  FROM salary
-  GROUP BY e_id
-  HAVING COUNT(*) >= 3
-);
-```
-![לפני](./שלב%20ב/update02-before.png)
-![הרצה](./שלב%20ב/update02-run.png)
-![אחרי](./שלב%20ב/update02-after.png)
-
----
-
-### 3. הורדת אחוז מס ל־8% עבור תשלומים מ־2022
-```sql
-UPDATE taxes
-SET percent = 8
-WHERE t_id IN (
-  SELECT ot.t_id
-  FROM out_taxes ot
-  NATURAL JOIN payment p
-  WHERE p.p_year = 2022
-);
-```
-![לפני](./שלב%20ב/update03-before.png)
-![הרצה](./שלב%20ב/update03-run.png)
-![אחרי](./שלב%20ב/update03-after.png)
-
----
-
-## 🔹 שימוש ב־ROLLBACK
-```sql
-BEGIN;
-UPDATE employee
-SET salary = salary + 123
-WHERE e_id = 200;
-ROLLBACK;
-```
-![לפני](./שלב%20ב/rollback-before.png)
-![הרצה](./שלב%20ב/rollback-run.png)
-![תוצאה](./שלב%20ב/rollback-result.png)
-
----
-
-## 🔹 שימוש ב־COMMIT
-```sql
-BEGIN;
-UPDATE employee
-SET salary = salary + 123
-WHERE e_id = 200;
-COMMIT;
-```
-![לפני](./שלב%20ב/commit-before.png)
-![הרצה](./שלב%20ב/commit-run.png)
-![תוצאה](./שלב%20ב/commit-result.png)
-
----
-
-## 🔹 אילוצים
-
-### 1. NOT NULL על תאריך בתשלומים (payment.p_date)
-```sql
-ALTER TABLE payment
-ALTER COLUMN p_date SET NOT NULL;
-
--- ניסיון הפרה
-INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
-VALUES (501, NULL, 5000, 'in');
-```
-![אילוץ 1](./שלב%20ב/constraint1-error.png)
-
----
-
-### 2. CHECK – סכום תשלום גדול מאפס (payment.p_sum > 0)
-```sql
-ALTER TABLE payment
-ADD CONSTRAINT check_positive_payment
-CHECK (p_sum > 0);
-
--- ניסיון הפרה
-INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
-VALUES (502, '2023-01-01', 0, 'in');
-```
-![אילוץ 2](./שלב%20ב/constraint2-error.png)
-
----
-
-### 3. DEFAULT על taxes.percent
-```sql
-ALTER TABLE taxes
-ALTER COLUMN percent SET DEFAULT 17;
-
--- בדיקה
-INSERT INTO taxes (t_id, taxname, principal_amount)
-VALUES (999, 'מס ניסיון', 10000);
-```
-![אילוץ 3](./שלב%20ב/constraint3-default.png)
-
----
-
-
-
 # דוח פרויקט – שלב ב
+## 🔹 שאילתות select
+
+
+
 
 ### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
 ```sql
@@ -333,11 +208,6 @@ WHERE t_id IN (
 
 ---
 
-
-## 🔹 שאילתות DELETE
-
-_(למלא בהתאם: כולל תיאור, שאילתה, צילום לפני/אחרי אם יש)_
-
 ## 🔹 שימוש ב־ROLLBACK
 ```sql
 BEGIN;
@@ -352,7 +222,6 @@ ROLLBACK;
 
 ---
 
-
 ## 🔹 אילוצים
 
 ### 1. NOT NULL על תאריך בתשלומים (payment.p_date)
@@ -364,7 +233,6 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/constraint1-error.png)
 
 ---
 
@@ -378,7 +246,6 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/constraint2-error.png)
 
 ---
 
@@ -391,6 +258,5 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/constraint3-default.png)
 
 ---

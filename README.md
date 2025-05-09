@@ -97,6 +97,19 @@
 # דוח פרויקט – שלב ב
 ## 🔹 שאילתות select
 
+### 1. כל העובדים שאחראים על השקעות, ממוינים לפי א׳-ב׳
+```sql
+SELECT DISTINCT e.e_id, e.e_name
+FROM employee e
+NATURAL JOIN payment p
+NATURAL JOIN in_Investments i
+ORDER BY e.e_name ASC
+```
+![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/select05-before.png)
+![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/select05-run.png)
+![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/select05-result.png)
+
+---
 
 
 

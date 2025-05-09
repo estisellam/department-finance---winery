@@ -20,6 +20,7 @@
 4. [החלטות עיצוב](#החלטות-עיצוב)
 5. [שיטות הכנסת נתונים](#שיטות-הכנסת-נתונים)
 6. [גיבוי ושחזור נתונים](#גיבוי-ושחזור-נתונים)
+7. [שלב ב – שאילתות ועדכונים](#שלב-ב--שאילתות-ועדכונים)
 
 ---
 
@@ -93,117 +94,9 @@
 בוצע שימוש ב־pgAdmin לייצוא ושחזור הנתונים.
 
 ---
-# דוח פרויקט – שלב ב
 
-## 🔹 שאילתות SELECT
+## שלב ב – שאילתות ועדכונים
 
-### 1. עובדים שאחראים על השקעות
-```sql
-SELECT DISTINCT e.e_id, e.e_name
-FROM employee e
-NATURAL JOIN payment p
-NATURAL JOIN in_Investments i
-ORDER BY e.e_name ASC;
-```
-
-### 2. רכישות בתאריך 15.6.2023
-```sql
-SELECT p.p_id, p.p_date, i.id_Consumer
-FROM payment p
-NATURAL JOIN in_Purchases_from i
-WHERE p.p_date = '2023-06-15';
-```
-
-### 3. עובדים שהחלו לעבוד לפני 2020
-```sql
-SELECT e_id, e_name, job_start_date
-FROM employee
-WHERE job_start_date < '2020-01-01'
-ORDER BY job_start_date ASC;
-```
-
-### 4. סכום תשלומים נכנסים לפי שנה
-```sql
-SELECT p_year, SUM(p_sum) AS total_income
-FROM payment
-WHERE in_or_out = 'in'
-GROUP BY p_year
-ORDER BY p_year;
-```
-
-### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
-```sql
-SELECT e.e_id, e.e_name, e.salary
-FROM employee e
-NATURAL JOIN payment p
-GROUP BY e.e_id, e.e_name, e.salary
-HAVING e.salary > 10000 AND COUNT(p.p_id) > 3;
-```
-
-### 6. כל ההכנסות לשנת 2023
-```sql
-SELECT p.*
-FROM payment p 
-JOIN budgets b ON p.p_year = b.b_year 
-WHERE p.p_year = 2023 AND p.in_or_out = 'in';
-```
-
-### 7. עובדים עם הפרש שכר נטו ≤ 2000
-```sql
-SELECT e.e_id, e.e_name, e.salary, s.neto_salary
-FROM employee e
-NATURAL JOIN salary s
-WHERE (e.salary - s.neto_salary) <= 2000;
-```
-
-### 8. צרכנים עם פחות מ־2 רכישות ב־2023
-```sql
-SELECT i.id_Consumer, COUNT(*) AS total_purchases
-FROM in_Purchases_from i
-NATURAL JOIN payment p
-WHERE EXTRACT(YEAR FROM p.p_date) = 2023
-GROUP BY i.id_Consumer
-HAVING COUNT(*) < 2;
-```
-
----
-
-## 🔹 שאילתות DELETE
-
-### 1. מחיקת רכישות מהיקב שבוצעו לפני 2023
-```sql
-DELETE FROM out_Purchase_for_the_winery
-WHERE p_id IN (
-  SELECT pfw.p_id
-  FROM out_Purchase_for_the_winery pfw
-  NATURAL JOIN payment p
-  WHERE p.p_date < '2023-01-01'
-);
-```
-
-### 2. מחיקת צרכנים עם פחות מ־2 רכישות
-```sql
-DELETE FROM Purchase_from_the_winery
-WHERE id_Consumer IN (
-  SELECT id_Consumer
-  FROM in_Purchases_from
-  GROUP BY id_Consumer
-  HAVING COUNT(*) < 2
-);
-```
-
-### 3. מחיקת צרכנים שלא רכשו בשנת 2024
-```sql
-DELETE FROM Purchase_from_the_winery
-WHERE id_Consumer IN (
-  SELECT id_Consumer
-  FROM in_Purchases_from
-  NATURAL JOIN payment
-  WHERE EXTRACT(YEAR FROM p_date) IS DISTINCT FROM 2024
-);
-```
-
----
 
 ## 🔹 שאילתות UPDATE
 
@@ -218,6 +111,11 @@ WHERE id_Investor IN (
   WHERE p.p_sum > 10000
 );
 ```
+![לפני](./שלב%20ב/update01-before.png)
+![הרצה](./שלב%20ב/update01-run.png)
+![אחרי](./שלב%20ב/update01-after.png)
+
+---
 
 ### 2. העלאת שכר ב־10% לעובדים עם 3+ תלושי שכר
 ```sql
@@ -230,6 +128,11 @@ WHERE e_id IN (
   HAVING COUNT(*) >= 3
 );
 ```
+![לפני](./שלב%20ב/update02-before.png)
+![הרצה](./שלב%20ב/update02-run.png)
+![אחרי](./שלב%20ב/update02-after.png)
+
+---
 
 ### 3. הורדת אחוז מס ל־8% עבור תשלומים מ־2022
 ```sql
@@ -242,6 +145,9 @@ WHERE t_id IN (
   WHERE p.p_year = 2022
 );
 ```
+![לפני](./שלב%20ב/update03-before.png)
+![הרצה](./שלב%20ב/update03-run.png)
+![אחרי](./שלב%20ב/update03-after.png)
 
 ---
 
@@ -252,8 +158,10 @@ UPDATE employee
 SET salary = salary + 123
 WHERE e_id = 200;
 ROLLBACK;
-
 ```
+![לפני](./שלב%20ב/rollback-before.png)
+![הרצה](./שלב%20ב/rollback-run.png)
+![תוצאה](./שלב%20ב/rollback-result.png)
 
 ---
 
@@ -264,10 +172,14 @@ UPDATE employee
 SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
-
 ```
+![לפני](./שלב%20ב/commit-before.png)
+![הרצה](./שלב%20ב/commit-run.png)
+![תוצאה](./שלב%20ב/commit-result.png)
 
 ---
+
+## 🔹 אילוצים
 
 ### 1. NOT NULL על תאריך בתשלומים (payment.p_date)
 ```sql
@@ -278,6 +190,7 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
+![אילוץ 1](./שלב%20ב/constraint1-error.png)
 
 ---
 
@@ -291,6 +204,7 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
+![אילוץ 2](./שלב%20ב/constraint2-error.png)
 
 ---
 
@@ -303,7 +217,4 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-
-```
-
-*הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*
+![אילוץ 3](./שלב%20ב/constraint3-default.png)

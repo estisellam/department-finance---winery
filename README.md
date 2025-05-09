@@ -97,22 +97,6 @@
 # דוח פרויקט – שלב ב
 ## 🔹 שאילתות select
 
-### 1. כל העובדים שאחראים על השקעות, ממוינים לפי א׳-ב׳
-```sql
-SELECT DISTINCT e.e_id, e.e_name
-FROM employee e
-NATURAL JOIN payment p
-NATURAL JOIN in_Investments i
-ORDER BY e.e_name ASC
-```
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/select05-before.png)
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/select05-run.png)
-![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/select05-result.png)
-
----
-
-
-
 ### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
 ```sql
 SELECT e.e_id, e.e_name, e.salary
@@ -249,6 +233,61 @@ COMMIT;
 ![תוצאה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/commit-result.png?raw=true)
 
 ---
+
+
+## שאילתות DELETE
+### 1. מחיקת רכישות מהיקב שבוצעו לפני שנת 2023
+```sql
+BEGIN;
+DELETE FROM out_Purchase_for_the_winery
+WHERE p_id IN (
+  SELECT pfw.p_id
+  FROM out_Purchase_for_the_winery pfw
+  NATURAL JOIN payment p
+  WHERE p.p_date < '2023-01-01'
+);
+ROLLBACK;
+```
+![](DBProject/שלב ב/delete01-before.png)
+![](DBProject/שלב ב/delete01-run.png)
+![](DBProject/שלב ב/delete01-after.png)
+
+### 2. מחיקת כל הצרכנים שביצעו פחות מ־2 רכישות
+
+```sql
+BEGIN;
+DELETE FROM Purchase_from_the_winery
+WHERE id_Consumer IN (
+  SELECT id_Consumer
+  FROM in_Purchases_from
+  GROUP BY id_Consumer
+  HAVING COUNT(*) < 2
+);
+ROLLBACK;
+```
+![](DBProject/שלב ב/delete02-before.png)
+![](DBProject/שלב ב/delete02-run.png)
+![](DBProject/שלב ב/delete02-after.png)
+
+### 3. מחיקת צרכנים שלא ביצעו אף רכישה בשנת 2024
+```sql
+BEGIN;
+DELETE FROM Purchase_from_the_winery
+WHERE id_Consumer IN (
+  SELECT DISTINCT pf.id_Consumer
+  FROM in_Purchases_from pf
+  WHERE pf.id_Consumer NOT IN (
+    SELECT pf2.id_Consumer
+    FROM in_Purchases_from pf2
+    NATURAL JOIN payment p
+    WHERE EXTRACT(YEAR FROM p.p_date) = 2024
+  )
+);
+ROLLBACK;
+```
+![](DBProject/שלב ב/delete03-before.png)
+![](DBProject/שלב ב/delete03-run.png)
+![](DBProject/שלב ב/delete03-after.png)
 ## 🔹 אילוצים
 
 ### 1. NOT NULL על תאריך בתשלומים (payment.p_date)

@@ -94,4 +94,121 @@
 
 ---
 
+# דוח פרויקט – שלב ב
+ֿ
+---
+
+## 🔹 דוגמאות מתוך צילומי מסך
+
+### 1. SELECT – עובדים שאחראים על השקעות
+```sql
+SELECT DISTINCT e.e_id, e.e_name
+FROM employee e
+NATURAL JOIN payment p
+NATURAL JOIN in_Investments i
+ORDER BY e.e_name ASC;
+```
+**הרצה:**  
+![הרצה](./שלב%20ב/שאילתה%207.47.40-2%202025-05-09%20update%201.png)
+
+**תוצאה:**  
+![תוצאה](./שלב%20ב/שאילתה%207.59.05-3%202025-05-09%20update%202.png)
+
+---
+
+### 2. UPDATE – אחוז רווח למשקיעים עם תשלום גבוה
+```sql
+BEGIN;
+UPDATE Investments
+SET profit_Percentage = 15
+WHERE id_Investor IN (
+  SELECT ii.id_Investor
+  FROM in_Investments ii
+  NATURAL JOIN payment p
+  WHERE p.p_sum > 10000
+);
+ROLLBACK;
+```
+
+**לפני:**  
+![לפני](./שלב%20ב/שאילתה%207.49.47-3%202025-05-09%20update%201.png)
+
+**הרצה:**  
+![הרצה](./שלב%20ב/שאילתה%207.50.02-3%202025-05-09%20update%201.png)
+
+**אחרי:**  
+![אחרי](./שלב%20ב/שאילתה%208.00.03-2%202025-05-09%20update%202.png)
+
+---
+
+### 3. אילוץ – NOT NULL על employee.e_name
+```sql
+ALTER TABLE employee
+ALTER COLUMN e_name SET NOT NULL;
+
+INSERT INTO employee (e_id, e_name, job_start_date, salary)
+VALUES (777, NULL, '2022-01-01', 8000);
+```
+
+**ניסיון הפרה:**  
+![אילוץ 1](./שלב%20ב/אילוץ%201%208.15.58.png)
+
+---
+
+### 4. אילוץ – CHECK על neto_salary <= salary
+```sql
+ALTER TABLE salary
+ADD CONSTRAINT check_net_salary
+CHECK (neto_salary <= salary);
+
+INSERT INTO salary (e_id, neto_salary)
+VALUES (1, 999999);
+```
+
+**ניסיון הפרה:**  
+![אילוץ 2](./שלב%20ב/אילוץ%202%208.18.14.png)
+
+---
+
+### 5. אילוץ – DEFAULT על taxes.percent
+```sql
+ALTER TABLE taxes
+ALTER COLUMN percent SET DEFAULT 17;
+
+INSERT INTO taxes (t_id, taxname, principal_amount)
+VALUES (999, 'מס ניסיון', 10000);
+```
+
+**תוצאה:**  
+![אילוץ 3](./שלב%20ב/אילוץ%203%208.19.22.png)
+
+---
+
+### 6. Rollback Example
+```sql
+BEGIN;
+UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
+ROLLBACK;
+```
+
+**צילום תוצאה לאחר Rollback:**  
+![rollback](./שלב%20ב/שאילתה%208.02.65-3%202025-05-09%20update%203.png)
+
+---
+
+### 7. Commit Example
+```sql
+BEGIN;
+UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
+COMMIT;
+```
+
+**צילום תוצאה לאחר Commit:**  
+![commit](./שלב%20ב/שאילתה%208.03.07-3%202025-05-09%20update%203.png)
+
+---
+
+📦 כל התמונות צורפו בתיקיית `שלב ב` לפי שמות קבצים ברורים לכל שאילתה.
+
+
 *הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*

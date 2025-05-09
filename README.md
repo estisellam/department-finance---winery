@@ -111,9 +111,9 @@ WHERE id_Investor IN (
   WHERE p.p_sum > 10000
 );
 ```
-![לפני](./שלב%20ב/update01-before.png)
-![הרצה](./שלב%20ב/update01-run.png)
-![אחרי](./שלב%20ב/update01-after.png)
+![לפני](update01-before.png)
+![הרצה](update01-run.png)
+![אחרי](update01-after.png)
 
 ---
 
@@ -128,9 +128,9 @@ WHERE e_id IN (
   HAVING COUNT(*) >= 3
 );
 ```
-![לפני](./שלב%20ב/update02-before.png)
-![הרצה](./שלב%20ב/update02-run.png)
-![אחרי](./שלב%20ב/update02-after.png)
+![לפני](update02-before.png)
+![הרצה](update02-run.png)
+![אחרי](update02-after.png)
 
 ---
 
@@ -145,9 +145,9 @@ WHERE t_id IN (
   WHERE p.p_year = 2022
 );
 ```
-![לפני](./שלב%20ב/update03-before.png)
-![הרצה](./שלב%20ב/update03-run.png)
-![אחרי](./שלב%20ב/update03-after.png)
+![לפני](update03-before.png)
+![הרצה](update03-run.png)
+![אחרי](update03-after.png)
 
 ---
 
@@ -159,9 +159,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 ROLLBACK;
 ```
-![לפני](./שלב%20ב/rollback-before.png)
-![הרצה](./שלב%20ב/rollback-run.png)
-![תוצאה](./שלב%20ב/rollback-result.png)
+![לפני](rollback-before.png)
+![הרצה](rollback-run.png)
+![תוצאה](rollback-result.png)
 
 ---
 
@@ -173,9 +173,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
 ```
-![לפני](./שלב%20ב/commit-before.png)
-![הרצה](./שלב%20ב/commit-run.png)
-![תוצאה](./שלב%20ב/commit-result.png)
+![לפני](commit-before.png)
+![הרצה](commit-run.png)
+![תוצאה](commit-result.png)
 
 ---
 
@@ -190,7 +190,7 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-![אילוץ 1](./שלב%20ב/constraint1-error.png)
+![אילוץ 1](constraint1-error.png)
 
 ---
 
@@ -204,7 +204,7 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
-![אילוץ 2](./שלב%20ב/constraint2-error.png)
+![אילוץ 2](constraint2-error.png)
 
 ---
 
@@ -217,7 +217,7 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-![אילוץ 3](./שלב%20ב/constraint3-default.png)
+![אילוץ 3](constraint3-default.png)
 
 ---
 
@@ -231,9 +231,9 @@ NATURAL JOIN payment p
 GROUP BY e.e_id, e.e_name, e.salary
 HAVING e.salary > 10000 AND COUNT(p.p_id) > 3;
 ```
-![before](./שלב%20ב/select05-before.png)
-![run](./שלב%20ב/select05-run.png)
-![result](./שלב%20ב/select05-result.png)
+![before](select05-before.png)
+![run](select05-run.png)
+![result](select05-result.png)
 
 ---
 
@@ -244,9 +244,9 @@ FROM payment p
 JOIN budgets b ON p.p_year = b.b_year 
 WHERE p.p_year = 2023 AND p.in_or_out = 'in';
 ```
-![before](./שלב%20ב/select06-before.png)
-![run](./שלב%20ב/select06-run.png)
-![result](./שלב%20ב/select06-result.png)
+![before](select06-before.png)
+![run](select06-run.png)
+![result](select06-result.png)
 
 ---
 
@@ -257,9 +257,9 @@ FROM employee e
 NATURAL JOIN salary s
 WHERE (e.salary - s.neto_salary) <= 2000;
 ```
-![before](./שלב%20ב/select07-before.png)
-![run](./שלב%20ב/select07-run.png)
-![result](./שלב%20ב/select07-result.png)
+![before](select07-before.png)
+![run](select07-run.png)
+![result](select07-result.png)
 
 ---
 
@@ -272,9 +272,9 @@ WHERE EXTRACT(YEAR FROM p.p_date) = 2023
 GROUP BY i.id_Consumer
 HAVING COUNT(*) < 2;
 ```
-![before](./שלב%20ב/select08-before.png)
-![run](./שלב%20ב/select08-run.png)
-![result](./שלב%20ב/select08-result.png)
+![before](select08-before.png)
+![run](select08-run.png)
+![result](select08-result.png)
 
 ---
 
@@ -291,9 +291,9 @@ WHERE id_Investor IN (
   WHERE p.p_sum > 10000
 );
 ```
-![לפני](./שלב%20ב/update01-before.png)
-![הרצה](./שלב%20ב/update01-run.png)
-![אחרי](./שלב%20ב/update01-after.png)
+![לפני](update01-before.png)
+![הרצה](update01-run.png)
+![אחרי](update01-after.png)
 
 ---
 
@@ -308,9 +308,9 @@ WHERE e_id IN (
   HAVING COUNT(*) >= 3
 );
 ```
-![לפני](./שלב%20ב/update02-before.png)
-![הרצה](./שלב%20ב/update02-run.png)
-![אחרי](./שלב%20ב/update02-after.png)
+![לפני](update02-before.png)
+![הרצה](update02-run.png)
+![אחרי](update02-after.png)
 
 ---
 
@@ -325,9 +325,9 @@ WHERE t_id IN (
   WHERE p.p_year = 2022
 );
 ```
-![לפני](./שלב%20ב/update03-before.png)
-![הרצה](./שלב%20ב/update03-run.png)
-![אחרי](./שלב%20ב/update03-after.png)
+![לפני](update03-before.png)
+![הרצה](update03-run.png)
+![אחרי](update03-after.png)
 
 ---
 
@@ -339,9 +339,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 ROLLBACK;
 ```
-![לפני](./שלב%20ב/rollback-before.png)
-![הרצה](./שלב%20ב/rollback-run.png)
-![תוצאה](./שלב%20ב/rollback-result.png)
+![לפני](rollback-before.png)
+![הרצה](rollback-run.png)
+![תוצאה](rollback-result.png)
 
 ---
 
@@ -353,9 +353,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
 ```
-![לפני](./שלב%20ב/commit-before.png)
-![הרצה](./שלב%20ב/commit-run.png)
-![תוצאה](./שלב%20ב/commit-result.png)
+![לפני](commit-before.png)
+![הרצה](commit-run.png)
+![תוצאה](commit-result.png)
 
 ---
 
@@ -370,7 +370,7 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-![אילוץ 1](./שלב%20ב/constraint1-error.png)
+![אילוץ 1](constraint1-error.png)
 
 ---
 
@@ -384,7 +384,7 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
-![אילוץ 2](./שלב%20ב/constraint2-error.png)
+![אילוץ 2](constraint2-error.png)
 
 ---
 
@@ -397,4 +397,4 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-![אילוץ 3](./שלב%20ב/constraint3-default.png)
+![אילוץ 3](constraint3-default.png)

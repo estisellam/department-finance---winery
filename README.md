@@ -248,8 +248,11 @@ WHERE t_id IN (
 ## 🔹 שימוש ב־ROLLBACK
 ```sql
 BEGIN;
-UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
+UPDATE employee
+SET salary = salary + 123
+WHERE e_id = 200;
 ROLLBACK;
+
 ```
 
 ---
@@ -257,8 +260,11 @@ ROLLBACK;
 ## 🔹 שימוש ב־COMMIT
 ```sql
 BEGIN;
-UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
+UPDATE employee
+SET salary = salary + 123
+WHERE e_id = 200;
 COMMIT;
+
 ```
 
 ---

@@ -221,9 +221,8 @@ ROLLBACK;
 ![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/rollback-result.png)
 
 ---
-
-
 ## 🔹 שימוש ב־COMMIT
+
 ```sql
 BEGIN;
 UPDATE employee
@@ -231,12 +230,12 @@ SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
 ```
-![לפני](./שלב%20ב/commit-before.png)
-![הרצה](./שלב%20ב/commit-run.png)
-![תוצאה](./שלב%20ב/commit-result.png)
+
+![לפני](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/commit-before.png?raw=true)  
+![הרצה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/commit-run.png?raw=true)  
+![תוצאה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/commit-result.png?raw=true)
 
 ---
-
 ## 🔹 אילוצים
 
 ### 1. NOT NULL על תאריך בתשלומים (payment.p_date)

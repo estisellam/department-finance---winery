@@ -222,6 +222,21 @@ ROLLBACK;
 
 ---
 
+
+## 🔹 שימוש ב־COMMIT
+```sql
+BEGIN;
+UPDATE employee
+SET salary = salary + 123
+WHERE e_id = 200;
+COMMIT;
+```
+![לפני](./שלב%20ב/commit-before.png)
+![הרצה](./שלב%20ב/commit-run.png)
+![תוצאה](./שלב%20ב/commit-result.png)
+
+---
+
 ## 🔹 אילוצים
 
 ### 1. NOT NULL על תאריך בתשלומים (payment.p_date)

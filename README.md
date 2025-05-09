@@ -133,10 +133,10 @@ ORDER BY p_year;
 
 ### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
 ```sql
-SELECT e.e_id, e.name, e.salary
+SELECT e.e_id, e.e_name, e.salary
 FROM employee e
 NATURAL JOIN payment p
-GROUP BY e.e_id, e.name, e.salary
+GROUP BY e.e_id, e.e_name, e.salary
 HAVING e.salary > 10000 AND COUNT(p.p_id) > 3;
 ```
 

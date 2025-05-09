@@ -95,12 +95,10 @@
 ---
 
 # דוח פרויקט – שלב ב
-ֿ
----
 
-## 🔹 דוגמאות מתוך צילומי מסך
+## 🔹 שאילתות SELECT
 
-### 1. SELECT – עובדים שאחראים על השקעות
+### 1. עובדים שאחראים על השקעות
 ```sql
 SELECT DISTINCT e.e_id, e.e_name
 FROM employee e
@@ -108,15 +106,14 @@ NATURAL JOIN payment p
 NATURAL JOIN in_Investments i
 ORDER BY e.e_name ASC;
 ```
-**הרצה:**  
-![הרצה](./שלב%20ב/שאילתה%207.47.40-2%202025-05-09%20update%201.png)
-
-**תוצאה:**  
-![תוצאה](./שלב%20ב/שאילתה%207.59.05-3%202025-05-09%20update%202.png)
+![הרצה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.47.40-2%202025-05-09%20update%201.png?raw=true)  
+![תוצאה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.59.05-2%202025-05-09%20update%202.png?raw=true)
 
 ---
 
-### 2. UPDATE – אחוז רווח למשקיעים עם תשלום גבוה
+## 🔹 שאילתות UPDATE
+
+### עדכון אחוז רווח למשקיעים עם תשלום מעל 10,000
 ```sql
 BEGIN;
 UPDATE Investments
@@ -129,19 +126,39 @@ WHERE id_Investor IN (
 );
 ROLLBACK;
 ```
-
-**לפני:**  
-![לפני](./שלב%20ב/שאילתה%207.49.47-3%202025-05-09%20update%201.png)
-
-**הרצה:**  
-![הרצה](./שלב%20ב/שאילתה%207.50.02-3%202025-05-09%20update%201.png)
-
-**אחרי:**  
-![אחרי](./שלב%20ב/שאילתה%208.00.03-2%202025-05-09%20update%202.png)
+![לפני](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.49.47-3%202025-05-09%20update%201.png?raw=true)  
+![הרצה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.50.02-3%202025-05-09%20update%201.png?raw=true)  
+![אחרי](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה8.00.08-2%202025-05-09%20update%202.png?raw=true)
 
 ---
 
-### 3. אילוץ – NOT NULL על employee.e_name
+## 🔹 שימוש ב־ROLLBACK
+```sql
+BEGIN;
+UPDATE employee
+SET salary = salary * 1.10
+WHERE e_id = 1;
+ROLLBACK;
+```
+![rollback](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה8.02.65-3%202025-05-09%20update%203.png?raw=true)
+
+---
+
+## 🔹 שימוש ב־COMMIT
+```sql
+BEGIN;
+UPDATE employee
+SET salary = salary * 1.10
+WHERE e_id = 1;
+COMMIT;
+```
+![commit](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה8.03.07-3%202025-05-09%20update%203.png?raw=true)
+
+---
+
+## 🔹 אילוצים
+
+### אילוץ 1: NOT NULL על employee.e_name
 ```sql
 ALTER TABLE employee
 ALTER COLUMN e_name SET NOT NULL;
@@ -149,13 +166,11 @@ ALTER COLUMN e_name SET NOT NULL;
 INSERT INTO employee (e_id, e_name, job_start_date, salary)
 VALUES (777, NULL, '2022-01-01', 8000);
 ```
-
-**ניסיון הפרה:**  
-![אילוץ 1](./שלב%20ב/אילוץ%201%208.15.58.png)
+![אילוץ 1](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/1%20אילוץ8.15.58-3%202025-05-09%20תמונה.png?raw=true)
 
 ---
 
-### 4. אילוץ – CHECK על neto_salary <= salary
+### אילוץ 2: CHECK על neto_salary <= salary
 ```sql
 ALTER TABLE salary
 ADD CONSTRAINT check_net_salary
@@ -164,13 +179,11 @@ CHECK (neto_salary <= salary);
 INSERT INTO salary (e_id, neto_salary)
 VALUES (1, 999999);
 ```
-
-**ניסיון הפרה:**  
-![אילוץ 2](./שלב%20ב/אילוץ%202%208.18.14.png)
+![אילוץ 2](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/2%20אילוץ8.18.06-3%202025-05-09%20תמונה.png?raw=true)
 
 ---
 
-### 5. אילוץ – DEFAULT על taxes.percent
+### אילוץ 3: DEFAULT על taxes.percent
 ```sql
 ALTER TABLE taxes
 ALTER COLUMN percent SET DEFAULT 17;
@@ -178,37 +191,7 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-
-**תוצאה:**  
-![אילוץ 3](./שלב%20ב/אילוץ%203%208.19.22.png)
-
----
-
-### 6. Rollback Example
-```sql
-BEGIN;
-UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
-ROLLBACK;
-```
-
-**צילום תוצאה לאחר Rollback:**  
-![rollback](./שלב%20ב/שאילתה%208.02.65-3%202025-05-09%20update%203.png)
-
----
-
-### 7. Commit Example
-```sql
-BEGIN;
-UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
-COMMIT;
-```
-
-**צילום תוצאה לאחר Commit:**  
-![commit](./שלב%20ב/שאילתה%208.03.07-3%202025-05-09%20update%203.png)
-
----
-
-📦 כל התמונות צורפו בתיקיית `שלב ב` לפי שמות קבצים ברורים לכל שאילתה.
+![אילוץ 3](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/3%20אילוץ8.19.22-3%202025-05-09%20תמונה.png?raw=true)
 
 
 *הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*

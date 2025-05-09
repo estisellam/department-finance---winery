@@ -150,7 +150,7 @@ WHERE p.p_year = 2023 AND p.in_or_out = 'in';
 
 ### 7. עובדים עם הפרש שכר נטו ≤ 2000
 ```sql
-SELECT e.e_id, e.name, e.salary, s.neto_salary
+SELECT e.e_id, e.e_name, e.salary, s.neto_salary
 FROM employee e
 NATURAL JOIN salary s
 WHERE (e.salary - s.neto_salary) <= 2000;

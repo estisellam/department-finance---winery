@@ -105,13 +105,72 @@ NATURAL JOIN payment p
 NATURAL JOIN in_Investments i
 ORDER BY e.e_name ASC;
 ```
-📷 *אין תמונות זמינות כרגע*
+
+### 2. רכישות בתאריך 15.6.2023
+```sql
+SELECT p.p_id, p.p_date, i.id_Consumer
+FROM payment p
+NATURAL JOIN in_Purchases_from i
+WHERE p.p_date = '2023-06-15';
+```
+
+### 3. עובדים שהחלו לעבוד לפני 2020
+```sql
+SELECT e_id, e_name, job_start_date
+FROM employee
+WHERE job_start_date < '2020-01-01'
+ORDER BY job_start_date ASC;
+```
+
+### 4. סכום תשלומים נכנסים לפי שנה
+```sql
+SELECT p_year, SUM(p_sum) AS total_income
+FROM payment
+WHERE in_or_out = 'in'
+GROUP BY p_year
+ORDER BY p_year;
+```
+
+### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
+```sql
+SELECT e.e_id, e.name, e.salary
+FROM employee e
+NATURAL JOIN payment p
+GROUP BY e.e_id, e.name, e.salary
+HAVING e.salary > 10000 AND COUNT(p.p_id) > 3;
+```
+
+### 6. כל ההכנסות לשנת 2023
+```sql
+SELECT p.*
+FROM payment p 
+JOIN budgets b ON p.p_year = b.b_year 
+WHERE p.p_year = 2023 AND p.in_or_out = 'in';
+```
+
+### 7. עובדים עם הפרש שכר נטו ≤ 2000
+```sql
+SELECT e.e_id, e.name, e.salary, s.neto_salary
+FROM employee e
+NATURAL JOIN salary s
+WHERE (e.salary - s.neto_salary) <= 2000;
+```
+
+### 8. צרכנים עם פחות מ־2 רכישות ב־2023
+```sql
+SELECT i.id_Consumer, COUNT(*) AS total_purchases
+FROM in_Purchases_from i
+NATURAL JOIN payment p
+WHERE EXTRACT(YEAR FROM p.p_date) = 2023
+GROUP BY i.id_Consumer
+HAVING COUNT(*) < 2;
+```
 
 ---
 
 ## 🔹 שאילתות DELETE
 
-### מחיקת רכישות מהיקב שבוצעו לפני 2023
+### 1. מחיקת רכישות מהיקב שבוצעו לפני 2023
 ```sql
 DELETE FROM out_Purchase_for_the_winery
 WHERE p_id IN (
@@ -121,15 +180,35 @@ WHERE p_id IN (
   WHERE p.p_date < '2023-01-01'
 );
 ```
-📷 *אין תמונות זמינות כרגע*
+
+### 2. מחיקת צרכנים עם פחות מ־2 רכישות
+```sql
+DELETE FROM Purchase_from_the_winery
+WHERE id_Consumer IN (
+  SELECT id_Consumer
+  FROM in_Purchases_from
+  GROUP BY id_Consumer
+  HAVING COUNT(*) < 2
+);
+```
+
+### 3. מחיקת צרכנים שלא רכשו בשנת 2024
+```sql
+DELETE FROM Purchase_from_the_winery
+WHERE id_Consumer IN (
+  SELECT id_Consumer
+  FROM in_Purchases_from
+  NATURAL JOIN payment
+  WHERE EXTRACT(YEAR FROM p_date) IS DISTINCT FROM 2024
+);
+```
 
 ---
 
 ## 🔹 שאילתות UPDATE
 
-### עדכון אחוז רווח למשקיעים עם תשלום מעל 10,000
+### 1. עדכון אחוז רווח למשקיעים עם תשלום מעל 10,000
 ```sql
-BEGIN;
 UPDATE Investments
 SET profit_Percentage = 15
 WHERE id_Investor IN (
@@ -138,73 +217,83 @@ WHERE id_Investor IN (
   NATURAL JOIN payment p
   WHERE p.p_sum > 10000
 );
-ROLLBACK;
 ```
-![לפני](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.49.47-3%202025-05-09%20update%201.png?raw=true)  
-![הרצה](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה7.50.02-3%202025-05-09%20update%201.png?raw=true)  
-![אחרי](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה8.00.08-2%202025-05-09%20update%202.png?raw=true)
+
+### 2. העלאת שכר ב־10% לעובדים עם 3+ תלושי שכר
+```sql
+UPDATE employee
+SET salary = salary * 1.10
+WHERE e_id IN (
+  SELECT e_id
+  FROM salary
+  GROUP BY e_id
+  HAVING COUNT(*) >= 3
+);
+```
+
+### 3. הורדת אחוז מס ל־8% עבור תשלומים מ־2022
+```sql
+UPDATE taxes
+SET percent = 8
+WHERE t_id IN (
+  SELECT ot.t_id
+  FROM out_taxes ot
+  NATURAL JOIN payment p
+  WHERE p.year = 2022
+);
+```
 
 ---
 
 ## 🔹 שימוש ב־ROLLBACK
 ```sql
 BEGIN;
-UPDATE employee
-SET salary = salary * 1.10
-WHERE e_id = 1;
+UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
 ROLLBACK;
 ```
-![rollback](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה8.02.65-3%202025-05-09%20update%203.png?raw=true)
 
 ---
 
 ## 🔹 שימוש ב־COMMIT
 ```sql
 BEGIN;
-UPDATE employee
-SET salary = salary * 1.10
-WHERE e_id = 1;
+UPDATE employee SET salary = salary * 1.10 WHERE e_id = 1;
 COMMIT;
 ```
-![commit](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/שאילתה8.03.07-3%202025-05-09%20update%203.png?raw=true)
 
 ---
 
-## 🔹 אילוצים
+## 🔹 אילוצים (Constraints)
 
-### אילוץ 1: NOT NULL על employee.e_name
+### 1. NOT NULL על employee.e_name
 ```sql
 ALTER TABLE employee
 ALTER COLUMN e_name SET NOT NULL;
 
+-- ניסיון הפרה
 INSERT INTO employee (e_id, e_name, job_start_date, salary)
 VALUES (777, NULL, '2022-01-01', 8000);
 ```
-![אילוץ 1](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/1%20אילוץ8.15.58-3%202025-05-09%20תמונה.png?raw=true)
 
----
-
-### אילוץ 2: CHECK על neto_salary <= salary
+### 2. CHECK על neto_salary <= salary
 ```sql
 ALTER TABLE salary
 ADD CONSTRAINT check_net_salary
 CHECK (neto_salary <= salary);
 
+-- ניסיון הפרה
 INSERT INTO salary (e_id, neto_salary)
 VALUES (1, 999999);
 ```
-![אילוץ 2](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/2%20אילוץ8.18.06-3%202025-05-09%20תמונה.png?raw=true)
 
----
-
-### אילוץ 3: DEFAULT על taxes.percent
+### 3. DEFAULT על taxes.percent
 ```sql
 ALTER TABLE taxes
 ALTER COLUMN percent SET DEFAULT 17;
 
+-- בדיקה
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-![אילוץ 3](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב%20ב/3%20אילוץ8.19.22-3%202025-05-09%20תמונה.png?raw=true)
 
 *הפרויקט נבנה בשימוש PostgreSQL וכלי pgAdmin 4.*

@@ -48,13 +48,13 @@
 
 ## תרשים ERD
 
-
+![ERD](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png?raw=true)
 
 ---
 
 ## תרשים DSD
 
-
+![DSD](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png?raw=true)
 
 ---
 
@@ -87,7 +87,7 @@
 
 ## גיבוי ושחזור נתונים
 
-
+![Backup](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202025-05-02%20%D7%91-9.34.22.png?raw=true)
 
 **קובץ הגיבוי:** `gibuy.sql`  
 **קובץ השחזור:** `insertTables.sql`  
@@ -111,9 +111,9 @@ WHERE id_Investor IN (
   WHERE p.p_sum > 10000
 );
 ```
-
-
-
+![לפני](./שלב%20ב/update01-before.png)
+![הרצה](./שלב%20ב/update01-run.png)
+![אחרי](./שלב%20ב/update01-after.png)
 
 ---
 
@@ -128,9 +128,9 @@ WHERE e_id IN (
   HAVING COUNT(*) >= 3
 );
 ```
-
-
-
+![לפני](./שלב%20ב/update02-before.png)
+![הרצה](./שלב%20ב/update02-run.png)
+![אחרי](./שלב%20ב/update02-after.png)
 
 ---
 
@@ -145,9 +145,9 @@ WHERE t_id IN (
   WHERE p.p_year = 2022
 );
 ```
-
-
-
+![לפני](./שלב%20ב/update03-before.png)
+![הרצה](./שלב%20ב/update03-run.png)
+![אחרי](./שלב%20ב/update03-after.png)
 
 ---
 
@@ -159,9 +159,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 ROLLBACK;
 ```
-
-
-
+![לפני](./שלב%20ב/rollback-before.png)
+![הרצה](./שלב%20ב/rollback-run.png)
+![תוצאה](./שלב%20ב/rollback-result.png)
 
 ---
 
@@ -173,9 +173,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
 ```
-
-
-
+![לפני](./שלב%20ב/commit-before.png)
+![הרצה](./שלב%20ב/commit-run.png)
+![תוצאה](./שלב%20ב/commit-result.png)
 
 ---
 
@@ -190,7 +190,7 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-
+![אילוץ 1](./שלב%20ב/constraint1-error.png)
 
 ---
 
@@ -204,7 +204,7 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
-
+![אילוץ 2](./שלב%20ב/constraint2-error.png)
 
 ---
 
@@ -217,46 +217,109 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-
+![אילוץ 3](./שלב%20ב/constraint3-default.png)
 
 ---
 
 
-## 🔹 שאילתות SELECT (1–4)
+# מחלקת כספים - פרויקט בסיסי נתונים
 
-### 1. עובדים שאחראים על השקעות
-```sql
-SELECT DISTINCT e.e_id, e.e_name
-FROM employee e
-NATURAL JOIN payment p
-NATURAL JOIN in_Investments i
-ORDER BY e.e_name ASC;
-```
+**שמות המגישות:**  
+- וקנין הדס אסתר – 324966993  
+- ישראלי תהילה – 325119493  
 
-### 2. רכישות בתאריך 15.6.2023
-```sql
-SELECT p.p_id, p.p_date, i.id_Consumer
-FROM payment p
-NATURAL JOIN in_Purchases_from i
-WHERE p.p_date = '2023-06-15';
-```
+**שם המערכת:**  
+ניהול כספים ביקב  
+**היחידה הנבחרת:**  
+מחלקת כספים
 
-### 3. עובדים שהחלו לעבוד לפני 2020
-```sql
-SELECT e_id, e_name, job_start_date
-FROM employee
-WHERE job_start_date < '2020-01-01'
-ORDER BY job_start_date ASC;
-```
+---
 
-### 4. סכום תשלומים נכנסים לפי שנה
-```sql
-SELECT p_year, SUM(p_sum) AS total_income
-FROM payment
-WHERE in_or_out = 'in'
-GROUP BY p_year
-ORDER BY p_year;
-```
+## תוכן עניינים
+
+1. [מבוא](#מבוא)
+2. [תרשים ERD](#תרשים-erd)
+3. [תרשים DSD](#תרשים-dsd)
+4. [החלטות עיצוב](#החלטות-עיצוב)
+5. [שיטות הכנסת נתונים](#שיטות-הכנסת-נתונים)
+6. [גיבוי ושחזור נתונים](#גיבוי-ושחזור-נתונים)
+7. [שלב ב – שאילתות ועדכונים](#שלב-ב--שאילתות-ועדכונים)
+
+---
+
+## מבוא
+
+### תיאור הנתונים הנשמרים במערכת:
+
+1. **טבלת תשלומים (payment)** – מזהה, סכום, תאריך, סוג (הכנסה/הוצאה)
+2. **טבלת עובדים (employee)** – מזהה, שם, תאריך התחלה, שכר
+3. **טבלת תקציבים (budgets)** – שנה, סכום
+4. **טבלת השקעות (investments)** – מזהה השקעה, משקיע, סכום, תשואה
+5. **טבלת רכישות (purchases)** – מידע על מה נרכש, כמה, ומי רכש
+6. **טבלת מיסים (taxes)** – סכום, אחוז, כללים משתנים
+7. **טבלת משכורות (salary)** – ברוטו, נטו, הפרשים מול מס
+
+### הפונקציונליות העיקרית במערכת:
+
+- קישור תשלום להשקעות / רכישות / משכורות
+- חישוב שכר נטו לאחר ניכוי מס
+- ניהול תקציב מול הכנסות והוצאות בפועל
+- מעקב אחר רכישות לפי צרכן, כמות ומחיר
+- חישוב מסים לפי חוקים מותאמים
+
+---
+
+## תרשים ERD
+
+![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png?raw=true)
+
+---
+
+## תרשים DSD
+
+![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png?raw=true)
+
+---
+
+## החלטות עיצוב
+
+1. ריכוז כל סוגי התשלומים בטבלה אחת (`payment`) לניהול אחיד וקל.
+2. קישור ישיר בין `payment` לבין השקעות, רכישות ומשכורות – לשם מעקב ברור אחרי מקור ההוצאה/הכנסה.
+3. פיצול רכישות לרכישות כלליות ורכיבי רכישה – לפירוט מלא של מה נקנה.
+4. הפרדת משכורות – מאפשרת לחשב שכר נטו לפי חוקי מס משתנים.
+5. שימוש בטבלת תקציבים – למעקב שנתי ולהשוואה מול הוצאות.
+6. שמירת אחוזי מס בטבלה נפרדת – כך ניתן לעדכן חוקים בלי לשנות את מבנה הטבלאות.
+
+---
+
+## שיטות הכנסת נתונים
+
+### 1. שימוש ב־Mockaroo
+
+[mockarooFiles](https://github.com/estisellam/department-finance---winery/tree/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/mockarooFiles)
+
+### 2. שימוש ב־GENERATEDATA
+
+[generatedataFiles](https://github.com/estisellam/department-finance---winery/tree/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/generatedataFiles)
+
+### 3. סקריפט ב־Python
+
+[scripts folder](https://github.com/estisellam/department-finance---winery/tree/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/python_script)
+
+---
+
+## גיבוי ושחזור נתונים
+
+![](DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202025-05-02%20%D7%91-9.34.22.png?raw=true)
+
+**קובץ הגיבוי:** `gibuy.sql`  
+**קובץ השחזור:** `insertTables.sql`  
+בוצע שימוש ב־pgAdmin לייצוא ושחזור הנתונים.
+
+---
+
+## שלב ב – שאילתות ועדכונים
+
 
 
 ## 🔹 שאילתות UPDATE

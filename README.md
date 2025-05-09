@@ -48,13 +48,13 @@
 
 ## תרשים ERD
 
-![ERD](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/ERD.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/https%3A//github.com/estisellam/department-finance---winery/blob/main/DBProject/%25D7%25A9%25D7%259C%25D7%2591%2520%25D7%2590/ERD.png%3Fraw%3Dtrue?raw=true)
 
 ---
 
 ## תרשים DSD
 
-![DSD](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/DSD.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/https%3A//github.com/estisellam/department-finance---winery/blob/main/DBProject/%25D7%25A9%25D7%259C%25D7%2591%2520%25D7%2590/DSD.png%3Fraw%3Dtrue?raw=true)
 
 ---
 
@@ -87,7 +87,7 @@
 
 ## גיבוי ושחזור נתונים
 
-![Backup](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%90/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202025-05-02%20%D7%91-9.34.22.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/https%3A//github.com/estisellam/department-finance---winery/blob/main/DBProject/%25D7%25A9%25D7%259C%25D7%2591%2520%25D7%2590/%25D7%25A6%25D7%2599%25D7%259C%25D7%2595%25D7%259D%2520%25D7%259E%25D7%25A1%25D7%259A%25202025-05-02%2520%25D7%2591-9.34.22.png%3Fraw%3Dtrue?raw=true)
 
 **קובץ הגיבוי:** `gibuy.sql`  
 **קובץ השחזור:** `insertTables.sql`  
@@ -111,9 +111,9 @@ WHERE id_Investor IN (
   WHERE p.p_sum > 10000
 );
 ```
-![לפני](update01-before.png)
-![הרצה](update01-run.png)
-![אחרי](update01-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update01-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update01-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update01-after.png?raw=true)
 
 ---
 
@@ -128,9 +128,9 @@ WHERE e_id IN (
   HAVING COUNT(*) >= 3
 );
 ```
-![לפני](update02-before.png)
-![הרצה](update02-run.png)
-![אחרי](update02-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update02-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update02-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update02-after.png?raw=true)
 
 ---
 
@@ -145,9 +145,9 @@ WHERE t_id IN (
   WHERE p.p_year = 2022
 );
 ```
-![לפני](update03-before.png)
-![הרצה](update03-run.png)
-![אחרי](update03-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update03-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update03-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update03-after.png?raw=true)
 
 ---
 
@@ -159,9 +159,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 ROLLBACK;
 ```
-![לפני](rollback-before.png)
-![הרצה](rollback-run.png)
-![תוצאה](rollback-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/rollback-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/rollback-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/rollback-result.png?raw=true)
 
 ---
 
@@ -173,9 +173,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
 ```
-![לפני](commit-before.png)
-![הרצה](commit-run.png)
-![תוצאה](commit-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/commit-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/commit-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/commit-result.png?raw=true)
 
 ---
 
@@ -190,7 +190,7 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-![אילוץ 1](constraint1-error.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/constraint1-error.png?raw=true)
 
 ---
 
@@ -204,7 +204,7 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
-![אילוץ 2](constraint2-error.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/constraint2-error.png?raw=true)
 
 ---
 
@@ -217,7 +217,7 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-![אילוץ 3](constraint3-default.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/constraint3-default.png?raw=true)
 
 ---
 
@@ -231,9 +231,9 @@ NATURAL JOIN payment p
 GROUP BY e.e_id, e.e_name, e.salary
 HAVING e.salary > 10000 AND COUNT(p.p_id) > 3;
 ```
-![before](select05-before.png)
-![run](select05-run.png)
-![result](select05-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select05-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select05-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select05-result.png?raw=true)
 
 ---
 
@@ -244,9 +244,9 @@ FROM payment p
 JOIN budgets b ON p.p_year = b.b_year 
 WHERE p.p_year = 2023 AND p.in_or_out = 'in';
 ```
-![before](select06-before.png)
-![run](select06-run.png)
-![result](select06-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select06-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select06-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select06-result.png?raw=true)
 
 ---
 
@@ -257,9 +257,9 @@ FROM employee e
 NATURAL JOIN salary s
 WHERE (e.salary - s.neto_salary) <= 2000;
 ```
-![before](select07-before.png)
-![run](select07-run.png)
-![result](select07-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select07-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select07-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select07-result.png?raw=true)
 
 ---
 
@@ -272,9 +272,9 @@ WHERE EXTRACT(YEAR FROM p.p_date) = 2023
 GROUP BY i.id_Consumer
 HAVING COUNT(*) < 2;
 ```
-![before](select08-before.png)
-![run](select08-run.png)
-![result](select08-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select08-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select08-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/select08-result.png?raw=true)
 
 ---
 
@@ -291,9 +291,9 @@ WHERE id_Investor IN (
   WHERE p.p_sum > 10000
 );
 ```
-![לפני](update01-before.png)
-![הרצה](update01-run.png)
-![אחרי](update01-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update01-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update01-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update01-after.png?raw=true)
 
 ---
 
@@ -308,9 +308,9 @@ WHERE e_id IN (
   HAVING COUNT(*) >= 3
 );
 ```
-![לפני](update02-before.png)
-![הרצה](update02-run.png)
-![אחרי](update02-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update02-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update02-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update02-after.png?raw=true)
 
 ---
 
@@ -325,9 +325,9 @@ WHERE t_id IN (
   WHERE p.p_year = 2022
 );
 ```
-![לפני](update03-before.png)
-![הרצה](update03-run.png)
-![אחרי](update03-after.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update03-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update03-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/update03-after.png?raw=true)
 
 ---
 
@@ -339,9 +339,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 ROLLBACK;
 ```
-![לפני](rollback-before.png)
-![הרצה](rollback-run.png)
-![תוצאה](rollback-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/rollback-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/rollback-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/rollback-result.png?raw=true)
 
 ---
 
@@ -353,9 +353,9 @@ SET salary = salary + 123
 WHERE e_id = 200;
 COMMIT;
 ```
-![לפני](commit-before.png)
-![הרצה](commit-run.png)
-![תוצאה](commit-result.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/commit-before.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/commit-run.png?raw=true)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/commit-result.png?raw=true)
 
 ---
 
@@ -370,7 +370,7 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-![אילוץ 1](constraint1-error.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/constraint1-error.png?raw=true)
 
 ---
 
@@ -384,7 +384,7 @@ CHECK (p_sum > 0);
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (502, '2023-01-01', 0, 'in');
 ```
-![אילוץ 2](constraint2-error.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/constraint2-error.png?raw=true)
 
 ---
 
@@ -397,4 +397,4 @@ ALTER COLUMN percent SET DEFAULT 17;
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
 ```
-![אילוץ 3](constraint3-default.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/שלב ב/constraint3-default.png?raw=true)

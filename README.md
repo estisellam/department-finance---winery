@@ -297,13 +297,15 @@ VALUES (501, NULL, 5000, 'in');
 ---
 ### 2. אילוץ על שכר- שיהיה רק חיוב
 ```sql
-ALTER TABLE payment
-ADD CONSTRAINT check_positive_payment
-CHECK (p_sum > 0);
+-- הוספת האילוץ
+ALTER TABLE employee
+ADD CONSTRAINT check_positive_salary
+CHECK (salary > 0);
 
--- ניסיון הפרה
-INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
-VALUES (502, '2023-01-01', 0, 'in');
+-- ניסיון להפרת האילוץ
+INSERT INTO employee (e_id, e_name, start_date, salary)
+VALUES (300, 'דוגמה', '2025-01-01', -1000);
+
 ```
 
 ---

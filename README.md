@@ -96,6 +96,40 @@
 
 # דוח פרויקט – שלב ב
 ## 🔹 שאילתות select
+### 1. כל העובדים שאחראים על השקעות, ממוינים לפי א׳-ב׳
+```sql
+SELECT DISTINCT e.e_id, e.e_name
+FROM employee e
+NATURAL JOIN payment p
+NATURAL JOIN in_Investments i
+;ORDER BY e.e_name ASC
+```
+
+### 2. כל הרכישות שהתבצעו בתאריך 15.6.2023
+```sql
+SELECT p.p_id, p.p_date, i.id_Consumer
+FROM payment p
+NATURAL JOIN in_Purchases_from i
+WHERE p.p_date = '2023-06-15';
+```
+
+### 3. כל העובדים שהתחילו לעבוד לפני 2020
+```sql
+SELECT e_id, e_name, job_start_date
+FROM employee
+WHERE job_start_date < '2020-01-01'
+ORDER BY job_start_date ASC;
+```
+
+### 4. סך כל הסכום של תשלומים נכנסים בכל שנה
+```sql
+SELECT p_year, SUM(p_sum) AS total_income
+FROM payment
+WHERE in_or_out = 'in'
+GROUP BY p_year
+ORDER BY p_year;
+```
+
 
 ### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
 ```sql

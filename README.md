@@ -293,8 +293,8 @@ ALTER COLUMN p_date SET NOT NULL;
 INSERT INTO payment (p_id, p_date, p_sum, in_or_out)
 VALUES (501, NULL, 5000, 'in');
 ```
-
 ---
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/Constraints1.png)
 ### 2. אילוץ על שכר- שיהיה רק חיוב
 ```sql
 -- הוספת האילוץ
@@ -307,8 +307,8 @@ INSERT INTO employee (e_id, e_name, start_date, salary)
 VALUES (300, 'דוגמה', '2025-01-01', -1000);
 
 ```
-
 ---
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/Constraints%202.png)
 ### 3. אילוץ על מיסים- ערך ברירת המחדל של שיעור המס- 17%
 
 ```sql
@@ -326,3 +326,4 @@ SELECT * FROM taxes WHERE t_id = 999;
 ```
 
 ---
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/Constraints%203.png)

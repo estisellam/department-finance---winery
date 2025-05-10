@@ -284,8 +284,7 @@ ROLLBACK;
 ```
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/delete%203.png)
 ## 🔹 אילוצים
-
-### 1. NOT NULL על תאריך בתשלומים (payment.p_date)
+### 1. אילוץ NOT NULL על תאריך בתשלומים
 ```sql
 ALTER TABLE payment
 ALTER COLUMN p_date SET NOT NULL;
@@ -296,8 +295,7 @@ VALUES (501, NULL, 5000, 'in');
 ```
 
 ---
-
-### 2. CHECK – סכום תשלום גדול מאפס (payment.p_sum > 0)
+### 2. אילוץ על שכר- שיהיה רק חיוב
 ```sql
 ALTER TABLE payment
 ADD CONSTRAINT check_positive_payment
@@ -309,15 +307,20 @@ VALUES (502, '2023-01-01', 0, 'in');
 ```
 
 ---
+### 3. אילוץ על מיסים- ערך ברירת המחדל של שיעור המס- 17%
 
-### 3. DEFAULT על taxes.percent
 ```sql
+-- הוספת האילוץ
 ALTER TABLE taxes
 ALTER COLUMN percent SET DEFAULT 17;
 
--- בדיקה
+-- הכנסת רשומה ללא ציון אחוז המס
 INSERT INTO taxes (t_id, taxname, principal_amount)
 VALUES (999, 'מס ניסיון', 10000);
+
+-- בדיקת הערך שנקבע
+SELECT * FROM taxes WHERE t_id = 999;
+
 ```
 
 ---

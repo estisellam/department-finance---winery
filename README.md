@@ -104,6 +104,10 @@ NATURAL JOIN payment p
 NATURAL JOIN in_Investments i
 ;ORDER BY e.e_name ASC
 ```
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.24.02select4select1.png)
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.24.16select4select1.png)
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.24.19select4select1.png)
+---
 
 ### 2. כל הרכישות שהתבצעו בתאריך 2024-06-19
 ```sql
@@ -112,7 +116,9 @@ FROM payment p
 NATURAL JOIN in_Purchases_from i
 WHERE p.p_date = '2024-06-19';
 ```
-
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.30.40select2.png)
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.30.44select2.png)
+---
 ### 3. כל העובדים שהתחילו לעבוד לפני 2020
 ```sql
 SELECT e_id, e_name, job_start_date
@@ -120,6 +126,9 @@ FROM employee
 WHERE job_start_date < '2020-01-01'
 ORDER BY job_start_date ASC;
 ```
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.37.15select3.png)
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.37.18select3.png)
+---
 
 ### 4. סך כל הסכום של תשלומים נכנסים בכל שנה
 ```sql
@@ -129,8 +138,8 @@ WHERE in_or_out = 'in'
 GROUP BY p_year
 ORDER BY p_year;
 ```
-
-
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.38.02select4.png)
+![](DBProject/שלב%20ב/צילום%20מסך%202025-05-11%20ב-11.38.06select4.png)
 ### 5. עובדים עם שכר גבוה ואחריות ל־3+ תשלומים
 ```sql
 SELECT e.e_id, e.e_name, e.salary

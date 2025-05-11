@@ -9,7 +9,7 @@ ORDER BY e.e_name ASC;
 SELECT p.p_id, p.p_date, i.id_Consumer
 FROM payment p
 NATURAL JOIN in_Purchases_from i
-WHERE p.p_date = '2023-06-15';
+WHERE p.p_date = '2024-06-19';
 
 SELECT e_id, e_name, job_start_date
 FROM employee

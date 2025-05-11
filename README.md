@@ -105,12 +105,12 @@ NATURAL JOIN in_Investments i
 ;ORDER BY e.e_name ASC
 ```
 
-### 2. כל הרכישות שהתבצעו בתאריך 15.6.2023
+### 2. כל הרכישות שהתבצעו בתאריך 2024-06-19
 ```sql
 SELECT p.p_id, p.p_date, i.id_Consumer
 FROM payment p
 NATURAL JOIN in_Purchases_from i
-WHERE p.p_date = '2023-06-15';
+WHERE p.p_date = '2024-06-19';
 ```
 
 ### 3. כל העובדים שהתחילו לעבוד לפני 2020

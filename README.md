@@ -370,3 +370,94 @@ SELECT * FROM taxes WHERE t_id = 999;
 
 ---
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%91/Constraints%203.png)
+
+# דוח פרויקט – שלב ג
+## אגף מרכז מבקרים- ERD
+![](https://github.com/estisellam/department-finance---winery/commit/f117e605261b1d4ca97c42fe01e06d2b2863325d)
+
+## אגף מרכז מבקרים- DSD
+![](https://github.com/estisellam/department-finance---winery/commit/7de0465981aeccd60e31bbd41b7521e8853c5f6f)
+
+## אינטגרציה -ERD
+![](https://github.com/estisellam/department-finance---winery/commit/92954e3db0083b25dcac16b3a759ca1161b9b1cb)
+
+## אינטגרציה- DSD
+![](https://github.com/estisellam/department-finance---winery/commit/05823c746c1802a98f8cf82e061eb946a0c512eb)
+
+##  החלטות שנעשו בשלב האינטגרציה
+### עקרונות שהנחו אותנו:
+*לאחד טבלאות בעלות תפקיד דומה (כגון payment).
+*לשמור עקביות בשמות עמודות ומפתחות.
+*לייעל את הסכימה כדי למנוע כפילויות ולהקל על שליפות.
+
+### טבלאות שאוחדו:
+*payment+payment:
+אלו מייצגות תשלומים – משכורות, רכישות, תיירים, עובדים וכו'.
+
+אוחדו לטבלה אחת: payment.
+
+הוספנו עמודה חדשה payment_type שמסבירה את מקור התשלום (אורח, עובד, רכב וכו').
+
+2. employee+guide:
+מדריכים הם תת-סוג של עובדים.
+
+אוחדו לטבלה אחת: employee, עם עמודה role שמכילה ערכים כמו guide, admin, worker וכו'.
+
+השדות הייחודיים של guide כמו languages, guided הוכנסו עם ערכים רלוונטיים לעובדים מסוג guide ועם ערכי ברירת מחדל לשאר העובדים.
+
+### קשרים חדשים שנוצרו:
+payment קיבל קשרים חדשים ל־visitor וגם ל־employee, תלוי לפי payment_type.
+
+employee קושר ל־tour דרך שדה role = guide, כדי להוביל סיורים
+
+## הסבר מילולי של התהליך והפקודות
+
+### שינויים בטבלת employee
+
+#### הוספת שדות:
+- `employee_role` (`TEXT`)  
+  משמש לציון תפקיד העובד (למשל: `"guide"`, `"worker"`).
+
+- `languages` (`TEXT`)  
+  מציין אילו שפות מדריך מדבר. רלוונטי רק לעובדים בתפקיד מדריך.
+
+- `guided` (`BOOLEAN`)  
+  שדה מספרי לציון כמה הדרכות העובד ביצע.
+
+---
+
+### שינויים בטבלת התשלומים (`payment`)
+
+#### הוספת שדות:
+- `payment_type` (`TEXT`)  
+  מציין את מקור התשלום, לדוגמה: `"visitor"`, `"employee"`, `"vehicle"`.
+
+- `visitorid` (`INTEGER`)  
+  מזהה מבקר עבורו בוצע התשלום, במקרים בהם מקור התשלום הוא מבקר.
+
+#### הוספת קשרים (Foreign Keys):
+- `e_id` → `employee(e_id)`  
+  קישור של תשלום לעובד (למשל כאשר עובד שילם על שירות מסוים).
+
+- `visitorid` → `visitor(visitorid)`  
+  קישור של תשלום למבקר.
+
+---
+
+### שינויים בטבלת הסיורים (`tour`)
+
+#### הוספת קשר:
+- `guide_id` → `employee(e_id)`  
+  כל מדריך סיור חייב להיות עובד קיים בטבלת `employee`.
+
+---
+
+### סיכום
+
+שינויים אלו מאפשרים:
+- הבדלה בין סוגי עובדים.
+- מעקב אחר שפות הדרכה וניסיון הדרכתי.
+- שיוך תשלומים למקור (עובד, מבקר וכו').
+- הגדרת קשרים בין סיורים, מדריכים, תשלומים ומבקרים.
+
+

@@ -375,16 +375,16 @@ SELECT * FROM taxes WHERE t_id = 999;
 
 # דוח פרויקט – שלב ג
 ## אגף מרכז מבקרים- ERD
-![](DBProject/שלב%20ג/ERD_MERCAZ_MEVAKRIM.png)
+![](https://github.com/estisellam/department-finance---winery/commit/f117e605261b1d4ca97c42fe01e06d2b2863325d)
 
 ## אגף מרכז מבקרים- DSD
-![](DBProject/שלב%20ג/DSD%20mercaz%20mevacrim.jpeg)
+![](https://github.com/estisellam/department-finance---winery/commit/7de0465981aeccd60e31bbd41b7521e8853c5f6f)
 
 ## אינטגרציה -ERD
-![](DBProject/שלב%20ג/ERD%20Integration.png)
+![](https://github.com/estisellam/department-finance---winery/commit/92954e3db0083b25dcac16b3a759ca1161b9b1cb)
 
 ## אינטגרציה- DSD
-![](DBProject/שלב%20ג/DSD%20INTEGRETION.png)
+![](https://github.com/estisellam/department-finance---winery/commit/05823c746c1802a98f8cf82e061eb946a0c512eb)
 
 
 ## החלטות שנעשו בשלב האינטגרציה

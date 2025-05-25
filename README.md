@@ -418,7 +418,11 @@ employee קושר ל־tour דרך שדה role = guide, כדי להוביל סי�
 ## הסבר מילולי של התהליך והפקודות
 
 ### שינויים בטבלת employee
-
+```sql
+ALTER TABLE employee ADD COLUMN employee_role TEXT;           -- למשל 'guide', 'worker'
+ALTER TABLE employee ADD COLUMN languages TEXT;      -- רק למדריכים
+ALTER TABLE employee ADD COLUMN guided INTEGER;      -- רק למדריכים
+```
 #### הוספת שדות:
 - `employee_role` (`TEXT`)  
   משמש לציון תפקיד העובד (למשל: `"guide"`, `"worker"`).
@@ -426,13 +430,16 @@ employee קושר ל־tour דרך שדה role = guide, כדי להוביל סי�
 - `languages` (`TEXT`)  
   מציין אילו שפות מדריך מדבר. רלוונטי רק לעובדים בתפקיד מדריך.
 
-- `guided` (`BOOLEAN`)  
+- `guided` (`INTEGER`)  
   שדה מספרי לציון כמה הדרכות העובד ביצע.
 
 ---
 
 ### שינויים בטבלת התשלומים (`payment`)
 
+```sql
+ALTER TABLE payment ADD COLUMN payment_type TEXT;      -- מקור התשלום:
+```
 #### הוספת שדות:
 - `payment_type` (`TEXT`)  
   מציין את מקור התשלום, לדוגמה: `"visitor"`, `"employee"`, `"vehicle"`.
@@ -441,6 +448,12 @@ employee קושר ל־tour דרך שדה role = guide, כדי להוביל סי�
   מזהה מבקר עבורו בוצע התשלום, במקרים בהם מקור התשלום הוא מבקר.
 
 #### הוספת קשרים (Foreign Keys):
+```sql
+ALTER TABLE payment
+ADD CONSTRAINT fk_payment_employee
+FOREIGN KEY (e_id) REFERENCES employee(e_id);
+```
+
 - `e_id` → `employee(e_id)`  
   קישור של תשלום לעובד (למשל כאשר עובד שילם על שירות מסוים).
 
@@ -450,7 +463,11 @@ employee קושר ל־tour דרך שדה role = guide, כדי להוביל סי�
 ---
 
 ### שינויים בטבלת הסיורים (`tour`)
-
+```sql
+ALTER TABLE tour
+ADD CONSTRAINT fk_tour_guide
+FOREIGN KEY (guide_id) REFERENCES employee(e_id);
+```
 #### הוספת קשר:
 - `guide_id` → `employee(e_id)`  
   כל מדריך סיור חייב להיות עובד קיים בטבלת `employee`.

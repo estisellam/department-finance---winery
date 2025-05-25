@@ -461,3 +461,133 @@ employee קושר ל־tour דרך שדה role = guide, כדי להוביל סי�
 - הגדרת קשרים בין סיורים, מדריכים, תשלומים ומבקרים.
 
 
+## ֿ View 1 – `view_tours_with_guide_info`
+
+###  תיאור מילולי:
+מבט זה מאחד מידע מטבלת הסיורים (tour) עם מידע על מדריכים מטבלת העובדים (employee), וכולל רק עובדים בעלי תפקיד `guide`.
+המבט מציג: מזהה סיור, מחיר, תיאור, כמות משתתפים, שם המדריך, שפות שהוא דובר, וכמות סיורים שהעביר.
+
+```sql
+CREATE VIEW view_tours_with_guide_info AS
+SELECT 
+    t.tourid,
+    t.price,
+    t.description,
+    t.amount,
+    e.e_name AS guide_name,
+    e.languages,
+    e.guided_tours
+FROM 
+    tour t
+JOIN 
+    employee e ON tourid = e.e_id
+WHERE 
+    e.employee_role = 'guide';
+
+```
+
+
+---
+
+###  שאילתה 1:
+#### תיאור:
+מציגה את סך ההכנסות מכל סיור (מחיר * כמות משתתפים) עבור כל מדריך.
+```sql
+SELECT 
+    guide_name,
+    SUM(price * amount) AS total_income
+FROM 
+    view_tours_with_guide_info
+GROUP BY 
+    guide_name;
+```
+
+📷 **הכנס כאן תמונה של הפלט**
+
+---
+
+###  שאילתה 2:
+#### תיאור:
+מציגה את כל הסיורים שמחירם גבוה מהממוצע בכלל הסיורים.
+```sql
+SELECT * 
+FROM view_tours_with_guide_info
+WHERE price > (
+    SELECT AVG(price) 
+    FROM view_tours_with_guide_info
+);
+```
+
+📷 **הכנס כאן תמונה של הפלט**
+
+---
+
+## 💰 View 2 – `view_employee_payments`
+
+### 📘 תיאור מילולי:
+מבט זה מאחד בין טבלת התשלומים (payment) וטבלת העובדים (employee), ומציג מידע מלא על כל תשלום שבוצע לעובד:
+מזהה תשלום, תאריך, סכום, סוג תשלום, האם מדובר בהכנסה או הוצאה, שם העובד ותפקידו.
+
+```sql
+CREATE VIEW view_employee_payments AS
+SELECT 
+    p.p_id,
+    p.p_date,
+    p.p_sum,
+    p.payment_type,
+    p.in_or_out,
+    e.e_name AS employee_name,
+    e.employee_role
+FROM 
+    payment p
+JOIN 
+    employee e ON p.e_id = e.e_id;
+
+```
+
+
+---
+
+###  שאילתה 1:
+#### תיאור:
+מציגה את כל תשלומי השכר (`salary`) שבוצעו לעובדים, מהגבוה לנמוך.
+```sql
+SELECT 
+    employee_name,
+    employee_role,
+    p_sum,
+    p_date
+FROM 
+    view_employee_payments
+WHERE 
+    payment_type = 'salary'
+ORDER BY 
+    p_sum DESC;
+```
+
+📷 **הכנס כאן תמונה של הפלט**
+
+---
+
+###  שאילתה 2:
+#### תיאור:
+מציגה את כל התשלומים (הכנסות והוצאות) כאשר סכומי ההוצאות מוצגים כסכום שלילי – לצורך ניתוח תקציבי.
+```sql
+SELECT 
+    p_date,
+    employee_name,
+    employee_role,
+    payment_type,
+    in_or_out,
+    CASE 
+        WHEN in_or_out = 'in' THEN p_sum
+        ELSE -p_sum
+    END AS signed_amount
+FROM 
+    view_employee_payments
+ORDER BY 
+    p_date DESC;
+```
+
+📷 **הכנס כאן תמונה של הפלט**
+

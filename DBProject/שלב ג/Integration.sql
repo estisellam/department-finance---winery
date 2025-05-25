@@ -2,7 +2,7 @@
 -- מוסיפים שדות מיוחדים למדריכים
 ALTER TABLE employee ADD COLUMN employee_role TEXT;           -- למשל 'guide', 'worker'
 ALTER TABLE employee ADD COLUMN languages TEXT;      -- רק למדריכים
-ALTER TABLE employee ADD COLUMN guided BOOLEAN;      -- רק למדריכים
+ALTER TABLE employee ADD COLUMN guided INTEGER;      -- רק למדריכים
 
 
 ALTER TABLE payment ADD COLUMN payment_type TEXT;      -- מקור התשלום:

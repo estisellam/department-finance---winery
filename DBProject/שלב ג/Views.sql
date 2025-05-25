@@ -12,7 +12,7 @@ SELECT
 FROM 
     tour t
 JOIN 
-    employee e ON tourid = e.e_id
+    employee e ON t.guideid = e.e_id
 WHERE 
     e.employee_role = 'guide';
 

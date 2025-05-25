@@ -375,16 +375,16 @@ SELECT * FROM taxes WHERE t_id = 999;
 
 # דוח פרויקט – שלב ג
 ## אגף מרכז מבקרים- ERD
-![](https://github.com/estisellam/department-finance---winery/commit/f117e605261b1d4ca97c42fe01e06d2b2863325d)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%92/ERD_MERCAZ_MEVAKRIM.png?raw=true)
 
 ## אגף מרכז מבקרים- DSD
-![](https://github.com/estisellam/department-finance---winery/commit/7de0465981aeccd60e31bbd41b7521e8853c5f6f)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%92/DSD%20mercaz%20mevacrim.jpeg?raw=true)
 
 ## אינטגרציה -ERD
-![](https://github.com/estisellam/department-finance---winery/commit/92954e3db0083b25dcac16b3a759ca1161b9b1cb)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%92/ERD%20Integration.png?raw=true)
 
 ## אינטגרציה- DSD
-![](https://github.com/estisellam/department-finance---winery/commit/05823c746c1802a98f8cf82e061eb946a0c512eb)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%92/DSD%20INTEGRETION.png?raw=true)
 
 
 ## החלטות שנעשו בשלב האינטגרציה

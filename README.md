@@ -486,7 +486,7 @@ SELECT
     p1.payment_date,
     p1.e_id,
     p1.visitorid,
-    'credit' AS payment_type   -- או כל תיאור מתאים למקור הנתון
+    'credit' AS payment_type   -- 
 FROM payment1 p1;
 ```
 ---

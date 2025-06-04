@@ -631,4 +631,182 @@ ORDER BY
 ```
 ![](DBProject/שלב%20ג/m2.2.png)
 
+#דוח פרויקט – שלב ד
+
+---
+
+## פונקציה 1: חישוב סה"כ תשלום למדריך לפי מזהה
+
+### תיאור:
+פונקציה שמחזירה REF CURSOR של כל התשלומים למדריך מסוים ומחשבת את סכום התשלומים הכולל.
+
+### קוד:
+```sql
+CREATE OR REPLACE FUNCTION fn_total_payment_for_guide(guide_id_input INTEGER)
+RETURNS REF CURSOR AS $$
+DECLARE
+    total_sum NUMERIC := 0;
+    rec RECORD;
+    ref refcursor;
+BEGIN
+    OPEN ref FOR 
+        SELECT * FROM payment WHERE e_id = guide_id_input;
+
+    FOR rec IN SELECT p_sum FROM payment WHERE e_id = guide_id_input LOOP
+        total_sum := total_sum + rec.p_sum;
+    END LOOP;
+
+    RAISE NOTICE 'Total payment for guide ID %: %', guide_id_input, total_sum;
+    RETURN ref;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+### הוכחת ריצה:
+(הוסיפו כאן צילום מסך)
+
+---
+
+## פונקציה 2: מדריכים עם ניסיון מעל N סיורים
+
+### תיאור:
+מחזירה טבלה של מדריכים שביצעו יותר מ־N סיורים.
+
+### קוד:
+```sql
+CREATE OR REPLACE FUNCTION fn_guides_with_experience(min_tours INTEGER)
+RETURNS TABLE(e_id INTEGER, e_name TEXT, guided INTEGER) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT e_id, e_name, guided
+    FROM employee
+    WHERE employee_role = 'guide' AND guided > min_tours;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+### הוכחת ריצה:
+(הוסיפו כאן צילום מסך)
+
+---
+
+## פרוצדורה 1: עדכון תפקיד עובד
+
+### תיאור:
+פרוצדורה שבודקת אם העובד קיים ואם כן מעדכנת את תפקידו, אחרת זורקת חריגה.
+
+### קוד:
+```sql
+CREATE OR REPLACE PROCEDURE pr_update_employee_role(emp_id INTEGER, new_role TEXT)
+AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM employee WHERE e_id = emp_id) THEN
+        RAISE EXCEPTION 'No such employee with ID: %', emp_id;
+    END IF;
+
+    UPDATE employee SET employee_role = new_role WHERE e_id = emp_id;
+    RAISE NOTICE 'Role updated successfully for employee %', emp_id;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+### הוכחת ריצה:
+(הוסיפו כאן צילום מסך)
+
+---
+
+## פרוצדורה 2: דו"ח תשלומים לכל עובד
+
+### תיאור:
+יוצרת או מעדכנת סיכום תשלומים לפי עובד בתאריך של היום, כולל שימוש בלולאה ו־DML.
+
+### קוד:
+```sql
+CREATE OR REPLACE PROCEDURE pr_generate_payment_summary()
+AS $$
+DECLARE
+    r RECORD;
+BEGIN
+    FOR r IN SELECT e_id, SUM(p_sum) as total FROM payment GROUP BY e_id LOOP
+        INSERT INTO summary_report(emp_id, total_amount, report_date)
+        VALUES (r.e_id, r.total, CURRENT_DATE)
+        ON CONFLICT (emp_id, report_date) DO UPDATE SET total_amount = r.total;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+### הוכחת ריצה:
+(הוסיפו כאן צילום מסך)
+
+---
+
+## טריגר 1: בדיקת קיום עובד לפני הכנסת תשלום
+
+### קוד:
+```sql
+CREATE OR REPLACE FUNCTION trg_check_employee_exists()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM employee WHERE e_id = NEW.e_id) THEN
+        RAISE EXCEPTION 'Employee ID % does not exist', NEW.e_id;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_before_payment_insert
+BEFORE INSERT ON payment
+FOR EACH ROW EXECUTE FUNCTION trg_check_employee_exists();
+```
+
+---
+
+## טריגר 2: עדכון summary_report אחרי הכנסת תשלום
+
+### קוד:
+```sql
+CREATE OR REPLACE FUNCTION trg_update_summary()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO summary_report(emp_id, total_amount, report_date)
+    VALUES (NEW.e_id, NEW.p_sum, CURRENT_DATE)
+    ON CONFLICT (emp_id, report_date)
+    DO UPDATE SET total_amount = summary_report.total_amount + NEW.p_sum;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_after_payment_insert
+AFTER INSERT ON payment
+FOR EACH ROW EXECUTE FUNCTION trg_update_summary();
+```
+
+---
+
+## תוכנית ראשית 1: הפעלת פונקציה ופרוצדורה
+
+```sql
+DO $$
+DECLARE
+    c refcursor;
+BEGIN
+    c := fn_total_payment_for_guide(2);
+    CALL pr_update_employee_role(2, 'admin');
+END;
+$$;
+```
+
+---
+
+## תוכנית ראשית 2: הפעלת פונקציה 2 ופרוצדורה 2
+
+```sql
+DO $$
+BEGIN
+    CALL pr_generate_payment_summary();
+    PERFORM * FROM fn_guides_with_experience(10);
+END;
+$$;
+```
 

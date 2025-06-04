@@ -477,18 +477,46 @@ SET
 FROM guide g
 WHERE e.e_id = g.guide_id;
 ```
-
+##### הסבר:
+אחרי שיצרנו את העמודות החדשות, משכנו ערכים מטבלת guide לפי ההתאמה של הid של העובדים
 ```sql
-INSERT INTO payment (payment_id, amount, payment_date, e_id, visitorid, payment_type)
-SELECT 
-    p1.payment_id,
+INSERT INTO payments_table (p_id, p_date, in_or_out, p_sum, p_year, e_id, payment_type)
+SELECT
+    p1.paymentid,
+    p1.paymentdate,
+    'in',
     p1.amount,
-    p1.payment_date,
-    p1.e_id,
-    p1.visitorid,
-    'credit' AS payment_type   -- 
+    EXTRACT(YEAR FROM p1.paymentdate),
+    NULL,
+    payment method 
 FROM payment1 p1;
 ```
+##### הסבר:
+המרנו נתונים מהטבלה payment למבנה הטבלה החדשה תוך חישוב והתאמת שדות כמו תאריך, שנה וסוג תשלום. קראנו לטבלה payment של הבסיס נתונים של המרכז מבקרים payment1 כדי שלא יהיו לנו כפילויות של טבלאות בבסיס נתונים המשותף לפני השינויים.
+
+#### הכנסת ערכי ברירת מחדל:
+```sql
+ALTER TABLE employee
+ALTER COLUMN guide SET DEFAULT 'worker';
+```
+כל עובד שהוא לא מדריך- הוא עובד פשוט
+```sql
+ALTER TABLE employee
+ALTER COLUMN languege SET DEFAULT 'עברית';
+```
+כל עובד שלא מדריך- דובר רק שפה עברית אלא אם הוגדר אחרת
+```sql
+ALTER TABLE employee
+ALTER COLUMN guided SET DEFAULT 0;
+```
+כל עובד שלא מדריך- לא הדריף אף פעם ולכן הדריך 0 סיורים
+```sql
+ALTER TABLE payment
+ALTER COLUMN payment_type SET DEFAULT 'credit';
+```
+שיטת התשלום הרגילה היום היא דרך כרטיס אשראי ולכן זה הברירת מחדל
+
+---
 ---
 
 ### סיכום

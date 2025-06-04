@@ -565,17 +565,22 @@ JOIN
 
 ###  שאילתה 1:
 #### תיאור:
-שאילתה מציגה את שמות העובדים, תפקידיהם, סכומי התשלום והתאריכים, כשהם ממוינים מהתשלום הכי חדש לישן .
+למצוא את סכום התשלומים הכולל שביצע כל עובד בתפקיד מסוים, לפי סוג תשלום (הכנסה/הוצאה), ולמיין לפי הסכום הגבוה ביותר..
 ```sql
 SELECT 
     employee_name,
     employee_role,
-    p_sum,
-    p_date
+    in_or_out,
+    SUM(p_sum) AS total_payment
 FROM 
     view_employee_payments
+GROUP BY 
+    employee_name, employee_role, in_or_out
+HAVING 
+    SUM(p_sum) > 10000
 ORDER BY 
-    p_date DESC;
+    total_payment DESC;
+
 ```
 
 ![](DBProject/שלב%20ג/m2.1.png)

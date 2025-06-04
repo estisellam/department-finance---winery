@@ -565,7 +565,7 @@ JOIN
 
 ###  שאילתה 1:
 #### תיאור:
-מציגה את כל תשלומי השכר (`salary`) שבוצעו לעובדים, מהגבוה לנמוך.
+שאילתה מציגה את שמות העובדים, תפקידיהם, סכומי התשלום והתאריכים, כשהם ממוינים מהתשלום הכי חדש לישן .
 ```sql
 SELECT 
     employee_name,
@@ -574,10 +574,8 @@ SELECT
     p_date
 FROM 
     view_employee_payments
-WHERE 
-    payment_type = 'salary'
 ORDER BY 
-    p_sum DESC;
+    p_date DESC;
 ```
 
 ![](DBProject/שלב%20ג/m2.1.png)

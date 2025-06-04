@@ -583,7 +583,7 @@ ORDER BY
 
 ```
 
-![](DBProject/שלב%20ג/m2.1.png)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%92/%D7%90%D7%99%D7%9C%D7%95%D7%A5%202%20%D7%A9%D7%90%D7%99%D7%9C%D7%AA%D7%901.png)
 
 ---
 

@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION fn_total_payment_for_guide(guide_id_input INTEGER)
+RETURNS REFCURSOR AS $$
+DECLARE
+    total_sum NUMERIC := 0;
+    rec RECORD;
+    ref REFCURSOR;
+BEGIN
+    OPEN ref FOR 
+        SELECT * FROM payment WHERE e_id = guide_id_input;
+
+    FOR rec IN SELECT p_sum FROM payment WHERE e_id = guide_id_input LOOP
+        total_sum := total_sum + rec.p_sum;
+    END LOOP;
+
+    RAISE NOTICE 'Total payment for guide ID %: %', guide_id_input, total_sum;
+
+    RETURN ref;
+END;
+$$ LANGUAGE plpgsql;

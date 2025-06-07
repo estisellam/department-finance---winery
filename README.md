@@ -659,7 +659,7 @@ ORDER BY
 ```
 ![](DBProject/שלב%20ג/m2.2.png)
 
-#דוח פרויקט – שלב ד
+# דוח פרויקט – שלב ד
 
 ---
 
@@ -671,27 +671,32 @@ ORDER BY
 ### קוד:
 ```sql
 CREATE OR REPLACE FUNCTION fn_total_payment_for_guide(guide_id_input INTEGER)
-RETURNS REF CURSOR AS $$
+RETURNS REFCURSOR AS $$
 DECLARE
     total_sum NUMERIC := 0;
     rec RECORD;
-    ref refcursor;
+    ref REFCURSOR;
 BEGIN
+    
     OPEN ref FOR 
         SELECT * FROM payment WHERE e_id = guide_id_input;
+
 
     FOR rec IN SELECT p_sum FROM payment WHERE e_id = guide_id_input LOOP
         total_sum := total_sum + rec.p_sum;
     END LOOP;
 
+  
     RAISE NOTICE 'Total payment for guide ID %: %', guide_id_input, total_sum;
+
     RETURN ref;
 END;
 $$ LANGUAGE plpgsql;
+
 ```
 
 ### הוכחת ריצה:
-(הוסיפו כאן צילום מסך)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%94%D7%95%D7%9B%D7%97%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%A4%D7%95%D7%A0%D7%A7%D7%A6%D7%99%D7%94%201.png)
 
 ---
 
@@ -728,18 +733,20 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE PROCEDURE pr_update_employee_role(emp_id INTEGER, new_role TEXT)
 AS $$
 BEGIN
+ 
     IF NOT EXISTS (SELECT 1 FROM employee WHERE e_id = emp_id) THEN
         RAISE EXCEPTION 'No such employee with ID: %', emp_id;
     END IF;
 
-    UPDATE employee SET employee_role = new_role WHERE e_id = emp_id;
+    UPDATE employee SET role = new_role WHERE e_id = emp_id;
     RAISE NOTICE 'Role updated successfully for employee %', emp_id;
 END;
 $$ LANGUAGE plpgsql;
+
 ```
 
 ### הוכחת ריצה:
-(הוסיפו כאן צילום מסך)
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%94%D7%95%D7%9B%D7%97%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%A4%D7%A8%D7%95%D7%A6%D7%93%D7%95%D7%A8%D7%94%201.png)
 
 ---
 
@@ -817,14 +824,15 @@ FOR EACH ROW EXECUTE FUNCTION trg_update_summary();
 ```sql
 DO $$
 DECLARE
-    c refcursor;
+    c REFCURSOR;
 BEGIN
-    c := fn_total_payment_for_guide(2);
-    CALL pr_update_employee_role(2, 'admin');
+    c := fn_total_payment_for_guide(2);      
+    CALL pr_update_employee_role(2, 'admin'); 
 END;
 $$;
-```
 
+```
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%AA%D7%95%D7%A6%D7%90%D7%95%D7%AA%20%D7%94%D7%A8%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%201.png)
 ---
 
 ## תוכנית ראשית 2: הפעלת פונקציה 2 ופרוצדורה 2

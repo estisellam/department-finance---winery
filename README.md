@@ -707,15 +707,21 @@ $$ LANGUAGE plpgsql;
 
 ### קוד:
 ```sql
+DROP FUNCTION IF EXISTS fn_guides_with_experience(integer);
+
 CREATE OR REPLACE FUNCTION fn_guides_with_experience(min_tours INTEGER)
-RETURNS TABLE(e_id INTEGER, e_name TEXT, guided INTEGER) AS $$
+RETURNS TABLE(e_id NUMERIC, e_name TEXT, guided_tours INTEGER) AS $$
 BEGIN
     RETURN QUERY
-    SELECT e_id, e_name, guided
+    SELECT 
+        employee.e_id,
+        employee.e_name::TEXT,
+        employee.guided_tours
     FROM employee
-    WHERE employee_role = 'guide' AND guided > min_tours;
+    WHERE employee.employee_role = 'guide' AND employee.guided_tours > min_tours;
 END;
 $$ LANGUAGE plpgsql;
+
 ```
 
 ### הוכחת ריצה:

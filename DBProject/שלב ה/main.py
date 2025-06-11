@@ -5,10 +5,10 @@ import psycopg2
 # פרטי התחברות
 conn_params = {
     "host": "localhost",
-    "port": 5432,
+    "port": 5433,
     "user": "postgres",
     "password": "16040010",
-    "dbname": "postgres"
+    "dbname": "stage5"
 }
 
 # פונקציה לשליפת עובדים

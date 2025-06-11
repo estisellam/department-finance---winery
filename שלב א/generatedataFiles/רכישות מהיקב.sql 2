@@ -1,0 +1,488 @@
+DROP TABLE IF EXISTS "Purchase_from_the_winery";
+
+CREATE TABLE "Purchase_from_the_winery" (
+  id_Consumer integer NULL,
+  Quantity_of_wine  integer NULL,
+  PricePerUnit integer NULL
+);
+
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (1,16,101),
+  (2,19,136),
+  (3,1,79),
+  (4,15,142),
+  (5,2,51),
+  (6,9,63),
+  (7,2,34),
+  (8,13,49),
+  (9,11,124),
+  (10,12,54);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (11,12,132),
+  (12,2,74),
+  (13,5,117),
+  (14,11,89),
+  (15,3,43),
+  (16,15,113),
+  (17,14,103),
+  (18,18,94),
+  (19,16,44),
+  (20,11,78);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (21,3,65),
+  (22,9,103),
+  (23,9,81),
+  (24,15,129),
+  (25,19,48),
+  (26,10,138),
+  (27,12,146),
+  (28,20,136),
+  (29,9,38),
+  (30,10,64);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (31,14,120),
+  (32,13,57),
+  (33,13,105),
+  (34,18,103),
+  (35,7,79),
+  (36,12,79),
+  (37,7,88),
+  (38,11,104),
+  (39,2,63),
+  (40,7,94);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (41,9,138),
+  (42,4,98),
+  (43,13,30),
+  (44,11,106),
+  (45,18,119),
+  (46,19,70),
+  (47,5,106),
+  (48,6,143),
+  (49,9,114),
+  (50,13,84);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (51,8,34),
+  (52,2,96),
+  (53,11,44),
+  (54,1,56),
+  (55,6,99),
+  (56,15,94),
+  (57,3,135),
+  (58,16,75),
+  (59,15,131),
+  (60,8,141);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (61,10,149),
+  (62,4,109),
+  (63,18,83),
+  (64,15,30),
+  (65,1,83),
+  (66,9,104),
+  (67,12,79),
+  (68,1,54),
+  (69,18,45),
+  (70,13,94);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (71,17,33),
+  (72,4,56),
+  (73,13,114),
+  (74,19,54),
+  (75,15,48),
+  (76,17,149),
+  (77,3,138),
+  (78,10,88),
+  (79,18,55),
+  (80,10,32);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (81,14,112),
+  (82,5,51),
+  (83,17,79),
+  (84,3,33),
+  (85,5,95),
+  (86,18,127),
+  (87,7,87),
+  (88,9,103),
+  (89,16,93),
+  (90,7,80);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (91,6,100),
+  (92,2,63),
+  (93,2,101),
+  (94,8,119),
+  (95,18,35),
+  (96,15,134),
+  (97,18,49),
+  (98,13,136),
+  (99,11,149),
+  (100,8,141);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (101,5,35),
+  (102,19,119),
+  (103,19,85),
+  (104,12,72),
+  (105,16,98),
+  (106,14,130),
+  (107,11,40),
+  (108,16,47),
+  (109,14,58),
+  (110,19,131);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (111,11,94),
+  (112,4,81),
+  (113,10,117),
+  (114,3,110),
+  (115,15,95),
+  (116,6,62),
+  (117,10,147),
+  (118,10,75),
+  (119,18,138),
+  (120,13,133);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (121,6,120),
+  (122,13,44),
+  (123,2,31),
+  (124,13,35),
+  (125,2,129),
+  (126,7,144),
+  (127,7,115),
+  (128,10,111),
+  (129,20,133),
+  (130,7,90);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (131,18,115),
+  (132,3,88),
+  (133,2,46),
+  (134,15,90),
+  (135,12,49),
+  (136,11,139),
+  (137,10,100),
+  (138,1,132),
+  (139,8,98),
+  (140,9,50);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (141,4,145),
+  (142,13,134),
+  (143,13,112),
+  (144,18,63),
+  (145,9,65),
+  (146,18,130),
+  (147,9,125),
+  (148,16,58),
+  (149,17,50),
+  (150,7,110);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (151,17,125),
+  (152,9,141),
+  (153,19,48),
+  (154,10,76),
+  (155,8,113),
+  (156,3,134),
+  (157,8,146),
+  (158,13,96),
+  (159,7,96),
+  (160,5,88);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (161,17,34),
+  (162,11,144),
+  (163,2,122),
+  (164,11,147),
+  (165,19,119),
+  (166,2,124),
+  (167,12,145),
+  (168,9,80),
+  (169,10,79),
+  (170,16,103);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (171,19,56),
+  (172,13,143),
+  (173,16,139),
+  (174,15,134),
+  (175,13,130),
+  (176,7,58),
+  (177,5,106),
+  (178,20,33),
+  (179,1,129),
+  (180,1,124);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (181,7,84),
+  (182,16,89),
+  (183,4,51),
+  (184,7,67),
+  (185,8,83),
+  (186,5,138),
+  (187,20,49),
+  (188,3,30),
+  (189,7,109),
+  (190,5,117);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (191,8,116),
+  (192,5,85),
+  (193,5,103),
+  (194,20,65),
+  (195,13,129),
+  (196,19,135),
+  (197,13,57),
+  (198,11,89),
+  (199,9,115),
+  (200,15,148);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (201,7,66),
+  (202,5,140),
+  (203,9,80),
+  (204,17,78),
+  (205,1,117),
+  (206,9,93),
+  (207,5,62),
+  (208,16,69),
+  (209,14,48),
+  (210,7,127);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (211,15,100),
+  (212,5,130),
+  (213,17,76),
+  (214,16,51),
+  (215,15,92),
+  (216,12,31),
+  (217,20,41),
+  (218,5,84),
+  (219,12,67),
+  (220,16,137);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (221,11,71),
+  (222,3,142),
+  (223,17,147),
+  (224,12,149),
+  (225,17,124),
+  (226,8,112),
+  (227,7,85),
+  (228,14,122),
+  (229,3,34),
+  (230,18,57);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (231,3,132),
+  (232,7,70),
+  (233,5,74),
+  (234,9,95),
+  (235,8,77),
+  (236,11,67),
+  (237,2,39),
+  (238,6,130),
+  (239,8,38),
+  (240,11,96);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (241,15,89),
+  (242,14,126),
+  (243,19,103),
+  (244,11,138),
+  (245,11,84),
+  (246,1,133),
+  (247,19,75),
+  (248,6,61),
+  (249,3,148),
+  (250,6,145);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (251,4,48),
+  (252,17,93),
+  (253,1,64),
+  (254,13,135),
+  (255,9,133),
+  (256,12,111),
+  (257,16,50),
+  (258,13,64),
+  (259,19,46),
+  (260,20,115);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (261,3,97),
+  (262,18,68),
+  (263,9,67),
+  (264,14,143),
+  (265,9,36),
+  (266,10,97),
+  (267,9,49),
+  (268,13,60),
+  (269,13,120),
+  (270,7,145);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (271,12,40),
+  (272,11,108),
+  (273,5,87),
+  (274,6,48),
+  (275,12,39),
+  (276,14,86),
+  (277,16,35),
+  (278,4,103),
+  (279,8,61),
+  (280,11,112);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (281,11,77),
+  (282,1,114),
+  (283,18,137),
+  (284,3,93),
+  (285,16,135),
+  (286,15,105),
+  (287,8,41),
+  (288,8,61),
+  (289,14,98),
+  (290,18,80);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (291,13,112),
+  (292,9,41),
+  (293,18,110),
+  (294,14,118),
+  (295,18,99),
+  (296,5,54),
+  (297,7,87),
+  (298,9,135),
+  (299,14,76),
+  (300,5,87);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (301,9,104),
+  (302,18,123),
+  (303,3,78),
+  (304,15,41),
+  (305,19,103),
+  (306,12,140),
+  (307,5,129),
+  (308,3,107),
+  (309,20,132),
+  (310,7,63);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (311,15,86),
+  (312,8,68),
+  (313,11,138),
+  (314,3,74),
+  (315,15,133),
+  (316,7,39),
+  (317,3,140),
+  (318,7,66),
+  (319,18,97),
+  (320,11,117);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (321,16,88),
+  (322,9,113),
+  (323,15,111),
+  (324,17,68),
+  (325,6,97),
+  (326,20,47),
+  (327,5,126),
+  (328,1,33),
+  (329,17,72),
+  (330,15,38);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (331,1,107),
+  (332,5,83),
+  (333,11,35),
+  (334,13,140),
+  (335,4,87),
+  (336,4,145),
+  (337,13,71),
+  (338,7,61),
+  (339,16,54),
+  (340,12,140);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (341,8,69),
+  (342,9,32),
+  (343,3,91),
+  (344,8,37),
+  (345,7,64),
+  (346,16,98),
+  (347,19,39),
+  (348,12,64),
+  (349,8,130),
+  (350,8,81);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (351,14,81),
+  (352,3,98),
+  (353,16,144),
+  (354,16,127),
+  (355,8,50),
+  (356,18,81),
+  (357,19,143),
+  (358,15,33),
+  (359,10,41),
+  (360,3,109);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (361,6,144),
+  (362,5,60),
+  (363,5,44),
+  (364,5,72),
+  (365,1,109),
+  (366,15,69),
+  (367,20,45),
+  (368,11,102),
+  (369,12,44),
+  (370,4,135);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (371,4,68),
+  (372,19,103),
+  (373,7,96),
+  (374,10,128),
+  (375,15,108),
+  (376,8,85),
+  (377,19,144),
+  (378,10,41),
+  (379,12,114),
+  (380,12,92);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (381,6,36),
+  (382,19,72),
+  (383,11,101),
+  (384,3,126),
+  (385,5,80),
+  (386,5,74),
+  (387,9,115),
+  (388,12,96),
+  (389,4,129),
+  (390,14,130);
+INSERT INTO Purchase_from_the_winery (id_Consumer,Quantity_of_wine ,PricePerUnit)
+VALUES
+  (391,11,98),
+  (392,20,131),
+  (393,11,84),
+  (394,4,123),
+  (395,4,149),
+  (396,2,46),
+  (397,8,121),
+  (398,8,140),
+  (399,8,125),
+  (400,19,141);

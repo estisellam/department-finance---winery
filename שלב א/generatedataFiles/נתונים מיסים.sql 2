@@ -1,0 +1,489 @@
+DROP TABLE IF EXISTS "taxes";
+
+CREATE TABLE "taxes" (
+  t_id integer NULL,
+  percent  integer NULL,
+  TaxName TEXT default NULL,
+  principal_amount integer NULL
+);
+
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (1,67,'Capital-Gains',40589),
+  (2,29,'VAT',42204),
+  (3,24,'Purchase',26489),
+  (4,85,'VAT',44731),
+  (5,58,'VAT',55428),
+  (6,22,'Income',43292),
+  (7,19,'Capital-Gains',83796),
+  (8,9,'National',15175),
+  (9,78,'Income',34579),
+  (10,35,'Capital-Gains',59664);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (11,55,'National',57628),
+  (12,77,'Income',38657),
+  (13,27,'Purchase',65279),
+  (14,5,'VAT',52928),
+  (15,39,'Purchase',45069),
+  (16,76,'Insurance',30453),
+  (17,50,'Income',57337),
+  (18,29,'',6199),
+  (19,59,'Purchase',39388),
+  (20,91,'Capital-Gains',16787);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (21,34,'Income',89546),
+  (22,9,'',48961),
+  (23,53,'National',83777),
+  (24,37,'Capital-Gains',94353),
+  (25,33,'National',54096),
+  (26,0,'Income',79011),
+  (27,4,'Income',17572),
+  (28,31,'Capital-Gains',60181),
+  (29,99,'Insurance',83610),
+  (30,67,'Purchase',91362);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (31,86,'Income',9773),
+  (32,87,'VAT',95922),
+  (33,49,'Insurance',78121),
+  (34,14,'Income',43709),
+  (35,62,'National',71137),
+  (36,77,'Purchase',27901),
+  (37,91,'Purchase',46883),
+  (38,89,'National',9941),
+  (39,94,'VAT',72030),
+  (40,6,'Purchase',41835);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (41,28,'Purchase',29050),
+  (42,38,'Income',53671),
+  (43,92,'National',49253),
+  (44,79,'Purchase',81061),
+  (45,19,'Purchase',57209),
+  (46,9,'National',63927),
+  (47,84,'Purchase',13501),
+  (48,88,'',76822),
+  (49,99,'Income',10318),
+  (50,7,'Insurance',7866);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (51,52,'Income',48511),
+  (52,40,'Income',40049),
+  (53,78,'National',66860),
+  (54,17,'National',52663),
+  (55,59,'Purchase',72799),
+  (56,76,'Income',30805),
+  (57,51,'Purchase',23784),
+  (58,91,'VAT',64881),
+  (59,75,'Purchase',55480),
+  (60,3,'Insurance',3331);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (61,77,'National',97252),
+  (62,13,'National',37058),
+  (63,94,'Income',20300),
+  (64,69,'Capital-Gains',38714),
+  (65,43,'Purchase',6985),
+  (66,26,'Insurance',3242),
+  (67,3,'Purchase',9356),
+  (68,22,'National',44207),
+  (69,16,'Insurance',60725),
+  (70,83,'Income',37395);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (71,46,'Insurance',9560),
+  (72,69,'Capital-Gains',30727),
+  (73,49,'',76970),
+  (74,83,'Insurance',97767),
+  (75,32,'VAT',57379),
+  (76,62,'',30628),
+  (77,46,'',41647),
+  (78,25,'Insurance',10825),
+  (79,6,'National',79857),
+  (80,54,'National',8048);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (81,17,'VAT',25865),
+  (82,32,'Capital-Gains',23193),
+  (83,47,'Purchase',53797),
+  (84,77,'Insurance',58583),
+  (85,15,'',86455),
+  (86,16,'National',91508),
+  (87,99,'Income',59571),
+  (88,44,'',87325),
+  (89,15,'',76942),
+  (90,22,'',25859);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (91,85,'Capital-Gains',52631),
+  (92,2,'Insurance',81076),
+  (93,63,'Insurance',61350),
+  (94,2,'Capital-Gains',81926),
+  (95,40,'Income',87938),
+  (96,76,'Capital-Gains',95375),
+  (97,29,'Capital-Gains',99895),
+  (98,17,'National',96284),
+  (99,19,'Insurance',29547),
+  (100,94,'Income',48702);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (101,50,'Insurance',9720),
+  (102,74,'Income',62671),
+  (103,69,'VAT',69887),
+  (104,60,'Purchase',57609),
+  (105,81,'National',30209),
+  (106,75,'VAT',4837),
+  (107,14,'Insurance',5583),
+  (108,17,'Purchase',85184),
+  (109,19,'National',82518),
+  (110,86,'VAT',84007);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (111,77,'Insurance',73282),
+  (112,5,'Insurance',90847),
+  (113,45,'National',50699),
+  (114,48,'Purchase',30276),
+  (115,5,'Capital-Gains',44332),
+  (116,40,'National',37956),
+  (117,32,'Insurance',77381),
+  (118,66,'VAT',92144),
+  (119,60,'VAT',64486),
+  (120,36,'Income',78835);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (121,14,'Insurance',81771),
+  (122,70,'Insurance',11956),
+  (123,41,'Insurance',95050),
+  (124,99,'Capital-Gains',32132),
+  (125,60,'Insurance',67478),
+  (126,5,'National',52139),
+  (127,79,'Capital-Gains',38963),
+  (128,98,'Income',19732),
+  (129,37,'Purchase',11236),
+  (130,24,'Purchase',69730);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (131,77,'National',1762),
+  (132,44,'Insurance',92049),
+  (133,81,'Insurance',56157),
+  (134,28,'Purchase',63176),
+  (135,67,'Insurance',99289),
+  (136,35,'Insurance',33814),
+  (137,25,'Purchase',88381),
+  (138,77,'Purchase',82146),
+  (139,37,'Purchase',4492),
+  (140,98,'Income',67728);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (141,74,'',7098),
+  (142,92,'Income',51290),
+  (143,47,'National',32737),
+  (144,53,'Capital-Gains',41278),
+  (145,88,'Purchase',3240),
+  (146,26,'Purchase',84487),
+  (147,4,'Purchase',53154),
+  (148,57,'Income',93784),
+  (149,52,'Purchase',82393),
+  (150,81,'Insurance',19849);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (151,21,'Capital-Gains',96662),
+  (152,80,'Income',86325),
+  (153,11,'VAT',91420),
+  (154,40,'Insurance',59269),
+  (155,78,'Insurance',54573),
+  (156,85,'Income',59425),
+  (157,29,'Income',49767),
+  (158,57,'Income',48168),
+  (159,19,'Income',35751),
+  (160,50,'',56619);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (161,7,'VAT',20817),
+  (162,93,'Income',28449),
+  (163,15,'Capital-Gains',92214),
+  (164,29,'',14226),
+  (165,56,'VAT',44464),
+  (166,66,'Insurance',78905),
+  (167,42,'Capital-Gains',40570),
+  (168,69,'Insurance',63293),
+  (169,81,'Income',51530),
+  (170,53,'National',46072);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (171,8,'Capital-Gains',21422),
+  (172,50,'Purchase',61800),
+  (173,63,'Capital-Gains',68718),
+  (174,55,'Insurance',14632),
+  (175,27,'Income',55012),
+  (176,57,'National',69798),
+  (177,12,'Purchase',98942),
+  (178,65,'Capital-Gains',66145),
+  (179,88,'National',37367),
+  (180,45,'Purchase',59267);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (181,89,'National',9904),
+  (182,68,'Purchase',65480),
+  (183,53,'Capital-Gains',55587),
+  (184,3,'VAT',62230),
+  (185,67,'Purchase',82080),
+  (186,24,'Income',52351),
+  (187,33,'National',34581),
+  (188,37,'',26833),
+  (189,73,'Insurance',94690),
+  (190,36,'Income',59638);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (191,12,'Capital-Gains',99747),
+  (192,5,'Capital-Gains',22976),
+  (193,94,'Income',39225),
+  (194,85,'VAT',10024),
+  (195,86,'',51229),
+  (196,75,'Insurance',58405),
+  (197,26,'Insurance',14982),
+  (198,1,'VAT',92221),
+  (199,79,'',33503),
+  (200,80,'Income',48925);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (201,16,'Insurance',34212),
+  (202,79,'Insurance',71309),
+  (203,95,'VAT',48400),
+  (204,91,'Purchase',42579),
+  (205,35,'Capital-Gains',46588),
+  (206,7,'Insurance',67793),
+  (207,59,'VAT',43510),
+  (208,5,'',12349),
+  (209,24,'Insurance',98239),
+  (210,74,'Income',51770);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (211,72,'VAT',28199),
+  (212,93,'Insurance',97970),
+  (213,40,'Insurance',33386),
+  (214,99,'Insurance',79719),
+  (215,1,'National',82017),
+  (216,82,'Capital-Gains',92384),
+  (217,64,'',89632),
+  (218,12,'Income',21686),
+  (219,79,'Purchase',95289),
+  (220,3,'',76436);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (221,37,'Capital-Gains',73843),
+  (222,90,'VAT',40161),
+  (223,62,'National',41123),
+  (224,100,'Income',18377),
+  (225,93,'National',19573),
+  (226,64,'Capital-Gains',38799),
+  (227,35,'Purchase',66925),
+  (228,29,'Capital-Gains',18230),
+  (229,30,'National',2963),
+  (230,78,'Capital-Gains',63362);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (231,70,'Capital-Gains',23958),
+  (232,70,'Capital-Gains',74351),
+  (233,84,'Capital-Gains',34097),
+  (234,56,'Purchase',97982),
+  (235,24,'Income',98470),
+  (236,24,'National',30547),
+  (237,56,'VAT',95053),
+  (238,70,'Capital-Gains',52018),
+  (239,92,'Capital-Gains',22636),
+  (240,88,'',77485);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (241,25,'Income',88396),
+  (242,31,'Insurance',22256),
+  (243,97,'Income',9085),
+  (244,14,'Capital-Gains',79235),
+  (245,90,'National',16418),
+  (246,80,'Purchase',13278),
+  (247,64,'Insurance',11123),
+  (248,96,'Income',10408),
+  (249,34,'Capital-Gains',71997),
+  (250,53,'VAT',88599);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (251,86,'Capital-Gains',28954),
+  (252,66,'Purchase',40898),
+  (253,30,'Capital-Gains',5184),
+  (254,59,'',20931),
+  (255,91,'Capital-Gains',25775),
+  (256,3,'Purchase',64903),
+  (257,55,'Purchase',26665),
+  (258,39,'Capital-Gains',56883),
+  (259,93,'Income',50129),
+  (260,82,'Purchase',91746);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (261,67,'Income',93844),
+  (262,46,'Capital-Gains',83975),
+  (263,62,'Income',63440),
+  (264,31,'Purchase',77975),
+  (265,95,'Purchase',19861),
+  (266,24,'Income',87843),
+  (267,26,'Insurance',71467),
+  (268,27,'Purchase',59630),
+  (269,100,'National',78179),
+  (270,4,'VAT',44487);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (271,36,'Income',83949),
+  (272,31,'Capital-Gains',45159),
+  (273,36,'National',29011),
+  (274,8,'Income',69126),
+  (275,97,'Insurance',36346),
+  (276,42,'Purchase',11890),
+  (277,57,'VAT',14460),
+  (278,26,'Income',96338),
+  (279,49,'National',80342),
+  (280,13,'Purchase',68998);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (281,39,'National',97180),
+  (282,38,'Capital-Gains',44585),
+  (283,89,'Capital-Gains',29432),
+  (284,23,'National',41419),
+  (285,86,'Capital-Gains',33645),
+  (286,11,'VAT',67618),
+  (287,26,'Capital-Gains',32529),
+  (288,81,'',96301),
+  (289,21,'Purchase',2351),
+  (290,42,'Income',94055);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (291,28,'Income',28616),
+  (292,27,'Purchase',15583),
+  (293,44,'Capital-Gains',11449),
+  (294,86,'Income',62343),
+  (295,19,'Capital-Gains',66182),
+  (296,71,'National',70207),
+  (297,91,'Insurance',42863),
+  (298,89,'Income',85495),
+  (299,18,'National',40461),
+  (300,96,'Income',21504);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (301,63,'',73733),
+  (302,53,'Purchase',15750),
+  (303,73,'Insurance',31048),
+  (304,29,'Purchase',2540),
+  (305,42,'Capital-Gains',11615),
+  (306,45,'Income',49752),
+  (307,20,'Purchase',81956),
+  (308,44,'',60273),
+  (309,59,'Income',44184),
+  (310,95,'Purchase',72359);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (311,39,'Purchase',5312),
+  (312,66,'Insurance',73361),
+  (313,70,'Capital-Gains',2225),
+  (314,50,'Insurance',48220),
+  (315,11,'Insurance',48484),
+  (316,87,'Income',60806),
+  (317,99,'Purchase',6126),
+  (318,40,'Income',80950),
+  (319,99,'Capital-Gains',16190),
+  (320,70,'National',94703);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (321,26,'Capital-Gains',42906),
+  (322,84,'Insurance',2554),
+  (323,93,'Income',20173),
+  (324,12,'Capital-Gains',32434),
+  (325,76,'VAT',52050),
+  (326,46,'Purchase',26903),
+  (327,49,'National',73228),
+  (328,85,'Purchase',24252),
+  (329,78,'Purchase',74154),
+  (330,37,'Capital-Gains',82033);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (331,7,'Purchase',20207),
+  (332,30,'Insurance',68041),
+  (333,26,'VAT',91019),
+  (334,6,'Income',26861),
+  (335,43,'VAT',21720),
+  (336,81,'Capital-Gains',81744),
+  (337,3,'National',10995),
+  (338,18,'',32995),
+  (339,55,'National',4918),
+  (340,43,'Purchase',34736);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (341,18,'Capital-Gains',83447),
+  (342,56,'',89791),
+  (343,65,'Insurance',91403),
+  (344,48,'Capital-Gains',5797),
+  (345,14,'Income',59212),
+  (346,18,'Purchase',34787),
+  (347,51,'Insurance',19936),
+  (348,80,'Capital-Gains',62522),
+  (349,100,'',42529),
+  (350,70,'Income',84575);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (351,31,'National',55279),
+  (352,13,'Insurance',7763),
+  (353,16,'Purchase',16537),
+  (354,97,'Insurance',96280),
+  (355,66,'',12797),
+  (356,26,'National',47719),
+  (357,23,'Insurance',6840),
+  (358,55,'Capital-Gains',18074),
+  (359,27,'Capital-Gains',72165),
+  (360,77,'VAT',74793);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (361,1,'National',89607),
+  (362,37,'',37491),
+  (363,32,'National',52021),
+  (364,64,'Insurance',86811),
+  (365,2,'',80224),
+  (366,84,'VAT',40395),
+  (367,76,'Capital-Gains',68404),
+  (368,90,'Insurance',63380),
+  (369,94,'Purchase',82778),
+  (370,100,'Purchase',84933);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (371,51,'Insurance',9661),
+  (372,66,'VAT',31788),
+  (373,63,'',94900),
+  (374,43,'Income',72048),
+  (375,96,'Purchase',87905),
+  (376,71,'National',92320),
+  (377,33,'National',54778),
+  (378,39,'',33288),
+  (379,26,'Income',99283),
+  (380,14,'Capital-Gains',48605);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (381,33,'Income',55756),
+  (382,5,'Insurance',12380),
+  (383,24,'Capital-Gains',2281),
+  (384,64,'Insurance',75569),
+  (385,50,'',68085),
+  (386,6,'Capital-Gains',7286),
+  (387,93,'Purchase',8417),
+  (388,24,'National',45895),
+  (389,46,'Income',51500),
+  (390,59,'Capital-Gains',23142);
+INSERT INTO taxes (t_id,percent ,TaxName,principal_amount)
+VALUES
+  (391,10,'Income',98722),
+  (392,1,'Purchase',60684),
+  (393,86,'Capital-Gains',23372),
+  (394,5,'Capital-Gains',83020),
+  (395,41,'Purchase',9957),
+  (396,97,'National',45204),
+  (397,40,'Purchase',47804),
+  (398,30,'Insurance',97462),
+  (399,96,'Capital-Gains',92238),
+  (400,75,'National',61653);

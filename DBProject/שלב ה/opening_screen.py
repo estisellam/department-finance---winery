@@ -4,34 +4,35 @@ import cv2
 import subprocess
 import sys
 
-# === שלב 1: הצגת סרטון פתיחה עם כפתור דלג ===
 def show_intro_video():
     video_path = "/Users/yhd/department-finance---winery/DBProject/שלב ה/wine_intro.mp4.mp4"
     cap = cv2.VideoCapture(video_path)
 
-    if not cap.isOpened():
-        print("⚠️ לא ניתן לפתוח את הווידאו. בדקי את הנתיב.")
-        show_landing_page()
-        return
+    root = tk.Tk()
+    root.attributes("-fullscreen", True)
+    root.configure(bg="black")
 
-    intro_root = tk.Tk()
-    intro_root.attributes("-fullscreen", True)
-    intro_root.configure(bg="black")
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
 
-    screen_width = intro_root.winfo_screenwidth()
-    screen_height = intro_root.winfo_screenheight()
-
-    lbl = tk.Label(intro_root, bg="black")
+    lbl = tk.Label(root, bg="black")
     lbl.pack(fill=tk.BOTH, expand=True)
 
-    # כפתור דילוג מעוצב
     def skip_video():
         cap.release()
-        intro_root.destroy()
-        show_landing_page()
+        try:
+            lbl.after_cancel(update_id)
+        except:
+            pass
+        for widget in root.winfo_children():
+            widget.destroy()
+        root.update_idletasks()
+        root.configure(bg="black")
+        root.geometry(f"{screen_width}x{screen_height}")
+        show_landing_page(root)
 
     skip_btn = tk.Button(
-        intro_root,
+        root,
         text="דלג",
         command=skip_video,
         font=("Helvetica", 12, "bold"),
@@ -51,55 +52,49 @@ def show_intro_video():
     def update_frame():
         ret, frame = cap.read()
         if ret:
-            frame = cv2.resize(frame, (screen_width, screen_height), interpolation=cv2.INTER_AREA)
+            frame = cv2.resize(frame, (screen_width, screen_height))
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = ImageTk.PhotoImage(Image.fromarray(frame))
             lbl.imgtk = img
             lbl.configure(image=img)
-            lbl.after(33, update_frame)
+            global update_id
+            update_id = lbl.after(33, update_frame)
         else:
-            cap.release()
-            intro_root.destroy()
-            show_landing_page()
+            skip_video()
 
-    intro_root.after(0, update_frame)
-    intro_root.mainloop()
+    update_id = lbl.after(0, update_frame)
+    root.mainloop()
 
-# === שלב 2: מסך עם כפתור “כניסה למערכת” ===
-def show_landing_page():
-    landing = tk.Tk()
-    landing.attributes("-fullscreen", True)
-    landing.configure(bg="black")
 
-    # כותרת ראשית
+def show_landing_page(root):
+    root.configure(bg="black")
+
     tk.Label(
-        landing,
+        root,
         text="WineCo",
         font=("Helvetica", 60, "bold"),
         fg="#800020",
         bg="black"
     ).pack(pady=(80, 10))
 
-    # כותרת משנית
     tk.Label(
-        landing,
+        root,
         text="מערכת ניהול כספים",
         font=("Helvetica", 26),
         fg="white",
         bg="black"
     ).pack(pady=(0, 60))
 
-    # כפתור פתיחה מעוצב
     def open_main():
-        landing.destroy()
+        root.destroy()
         subprocess.Popen([
             sys.executable,
-            "/Users/yhd/department-finance---winery/DBProject/שלב ה/main.py"
+            "/Users/yhd/department-finance---winery/DBProject/שלב ה/employee.py"
         ])
 
-    btn = tk.Button(
-        landing,
-        text=" רשימת משכורות",
+    tk.Button(
+        root,
+        text=" ניהול עובדים ",
         command=open_main,
         font=("Helvetica", 18, "bold"),
         bg="white",
@@ -111,12 +106,33 @@ def show_landing_page():
         activebackground="#f0f0f0",
         activeforeground="#800020",
         cursor="hand2"
-    )
-    btn.pack(pady=40)
+    ).pack(pady=40)
+ 
+    def open_summary():
+        root.destroy()
+        subprocess.Popen([
+            sys.executable,
+            "/Users/yhd/department-finance---winery/DBProject/שלב ה/summary_screen.py"
+        ])
+        
+    tk.Button(
+        root,
+        text="דו״ח סיכום תשלומים",
+       command=open_summary,
+        font=("Helvetica", 18, "bold"),
+        bg="white",
+        fg="#800020",
+        padx=40,
+        pady=16,
+        relief="raised",
+        bd=2,
+        activebackground="#f0f0f0",
+        activeforeground="#800020",
+        cursor="hand2"
+    ).pack(pady=10)
 
-    # קיצור יציאה
-    landing.bind("<Escape>", lambda e: landing.destroy())
-    landing.mainloop()
+    root.bind("<Escape>", lambda e: root.destroy())
 
-# התחלה
-show_intro_video()
+# הפעלת התוכנית
+if __name__ == "__main__":
+    show_intro_video()

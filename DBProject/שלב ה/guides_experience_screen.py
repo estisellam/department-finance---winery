@@ -8,8 +8,8 @@ conn_params = {
     "host": "localhost",
     "port": 5433,
     "user": "postgres",
-    "password": "tehila123",
-    "dbname": "backup"
+    "password": "16040010",
+    "dbname": "stage5"
 }
 
 def open_guides_experience_screen():

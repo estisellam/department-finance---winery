@@ -131,6 +131,53 @@ def show_landing_page(root):
         cursor="hand2"
     ).pack(pady=10)
 
+     def open_comparison_screen():
+        root.destroy()
+        subprocess.Popen([
+            sys.executable,
+            r"C:\Users\tehil\Desktop\compare_visitors_guides.py"
+        ])
+
+    tk.Button(
+        root,
+        text="השוואת מבקרים ומדריכים",
+        command=open_comparison_screen,
+        font=("Helvetica", 18, "bold"),
+        bg="white",
+        fg="#800020",
+        padx=40,
+        pady=16,
+        relief="raised",
+        bd=2,
+        activebackground="#f0f0f0",
+        activeforeground="#800020",
+        cursor="hand2"
+    ).pack(pady=10)
+
+
+    def open_guides_experience():
+        root.destroy()
+        subprocess.Popen([
+        sys.executable,
+        r"C:\Users\tehil\Desktop\guides_experience_screen.py"
+    ])
+
+    tk.Button(
+        root,
+        text="מדריכים עם ניסיון",
+        command=open_guides_experience,
+        font=("Helvetica", 18, "bold"),
+        bg="white",
+        fg="#800020",
+        padx=40,
+        pady=16,
+        relief="raised",
+        bd=2,
+        activebackground="#f0f0f0",
+        activeforeground="#800020",
+        cursor="hand2"
+    ).pack(pady=10)
+
     root.bind("<Escape>", lambda e: root.destroy())
 
 # הפעלת התוכנית

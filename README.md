@@ -863,3 +863,30 @@ $$;
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%94%D7%95%D7%9B%D7%97%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%202.png)
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%AA%D7%95%D7%A6%D7%90%D7%95%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%202.png)
 
+# דוח פרויקט - שלב ה
+
+```sql
+SELECT 
+    v.visitorid,
+    v.name,
+    COUNT(b.booking) AS total_bookings
+FROM visitor v
+NATURAL JOIN visitor_account
+NATURAL JOIN booking b
+GROUP BY v.visitorid, v.name
+ORDER BY total_bookings DESC;
+```
+
+```sql
+SELECT 
+    e.e_id,
+    e.name,
+    COUNT(t.tourid) AS total_tours,
+    ROUND(AVG(t.price), 2) AS avg_price
+FROM employee e
+NATURAL JOIN tour t
+WHERE e.role = 'guide'
+GROUP BY e.e_id, e.name
+ORDER BY total_tours DESC;
+```
+

@@ -186,41 +186,45 @@ class EmployeeManagerApp:
             messagebox.showerror("Error", str(e))
 
     def update_employee_popup(self, e_id, name, role, salary):
-     win = tk.Toplevel(self.root)
-     win.title("Update Employee")
-     win.configure(bg="#111111")
+        win = tk.Toplevel(self.root)
+        win.title("Update Employee")
+        win.configure(bg="#111111")
 
-     tk.Label(win, text="Name", bg="#111111", fg="white").pack(pady=5)
-     name_entry = tk.Entry(win)
-     name_entry.insert(0, name)
-     name_entry.pack()
+        tk.Label(win, text="Name", bg="#111111", fg="white").pack(pady=5)
+        name_entry = tk.Entry(win)
+        name_entry.insert(0, name)
+        name_entry.pack()
 
-     tk.Label(win, text="Role", bg="#111111", fg="white").pack(pady=5)
-     role_combo = ttk.Combobox(win, values=["admin", "guide", "worker"])
-     role_combo.set(role)
-     role_combo.pack()
+        tk.Label(win, text="Role", bg="#111111", fg="white").pack(pady=5)
+        role_combo = ttk.Combobox(win, values=["admin", "guide", "worker"])
+        role_combo.set(role)
+        role_combo.pack()
 
-     def save():
-        try:
-            new_name = name_entry.get()
-            new_role = role_combo.get()
-            conn = psycopg2.connect(**conn_params)
-            cursor = conn.cursor()
-            cursor.execute("""
-                UPDATE employee
-                SET e_name=%s, employee_role=%s
-                WHERE e_id=%s;
-            """, (new_name, new_role, e_id))
-            conn.commit()
-            conn.close()
-            self.fetch_employees()
-            win.destroy()
-            messagebox.showinfo("Updated", "Employee updated successfully.")
-        except Exception as e:
-            messagebox.showerror("Error", str(e))
+        def save():
+            try:
+                new_name = name_entry.get()
+                new_role = role_combo.get()
+                conn = psycopg2.connect(**conn_params)
+                cursor = conn.cursor()
 
-     tk.Button(win, text="Save", command=save, bg="#800020", fg="black", padx=20, pady=5).pack(pady=10)
+                # עדכון שם אם השתנה
+                if new_name != name:
+                    cursor.execute("""
+                        UPDATE employee SET e_name = %s WHERE e_id = %s;
+                    """, (new_name, e_id))
 
+                # קריאה לפרוצדורה אם התפקיד השתנה
+                if new_role != role:
+                     cursor.execute("CALL pr_update_employee_role(%s, %s)", (e_id, new_role))
+                conn.commit()
+                conn.close()
+                self.fetch_employees()
+                win.destroy()
+                messagebox.showinfo("Updated", "Employee updated successfully.")
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
+
+        tk.Button(win, text="Save", command=save, bg="#800020", fg="black", padx=20, pady=5).pack(pady=10)
 
     def delete_employee(self, e_id):
       try:

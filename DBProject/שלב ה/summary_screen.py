@@ -12,6 +12,11 @@ conn_params = {
     "password": "16040010",
     "dbname": "stage5"
 }
+import os
+
+# לפני open_summary_screen()
+current_dir = os.path.dirname(os.path.abspath(__file__))
+opening_screen_path = os.path.join(current_dir, "opening_screen.py")
 
 def open_summary_screen():
     root = tk.Tk()
@@ -146,19 +151,17 @@ def open_summary_screen():
 
 
 
-    # כפתור חזור
+# כפתור חזור
     tk.Button(root, text="חזור לתפריט הראשי",
-              font=("Helvetica", 12, "bold"),
-              bg="gray", fg="black",
-              padx=10, pady=4,
-              cursor="hand2",
-              command=lambda: [root.destroy(), subprocess.Popen([
-                  sys.executable,
-                  "/Users/yhd/department-finance---winery/DBProject/שלב ה/opening_screen.py"
-              ])]
-    ).pack(pady=5)
+          font=("Helvetica", 12, "bold"),
+          bg="gray", fg="black",
+          padx=10, pady=4,
+          cursor="hand2",
+          command=lambda: [root.destroy(), subprocess.Popen([
+              sys.executable, opening_screen_path
+          ])]
+).pack(pady=5)
 
-   
-
+    root.mainloop()
 if __name__ == "__main__":
     open_summary_screen()

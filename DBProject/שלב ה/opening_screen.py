@@ -108,12 +108,18 @@ def show_landing_page(root):
         cursor="hand2"
     ).pack(pady=40)
  
+    ##def open_summary():
+        ##root.destroy()
+       ## subprocess.Popen([
+         #   sys.executable,
+           # "/Users/yhd/department-finance---winery/DBProject/שלב ה/summary_screen.py"
+        #])
     def open_summary():
-        root.destroy()
-        subprocess.Popen([
-            sys.executable,
-            "/Users/yhd/department-finance---winery/DBProject/שלב ה/summary_screen.py"
-        ])
+         root.destroy()
+         subprocess.Popen([
+        "/Users/yhd/department-finance---winery/venv/bin/python",
+        "/Users/yhd/department-finance---winery/DBProject/שלב ה/summary_screen.py"
+    ])
         
     tk.Button(
         root,
@@ -131,7 +137,7 @@ def show_landing_page(root):
         cursor="hand2"
     ).pack(pady=10)
 
-     def open_comparison_screen():
+    def open_comparison_screen():
         root.destroy()
         subprocess.Popen([
             sys.executable,

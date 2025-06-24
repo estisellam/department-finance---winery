@@ -890,3 +890,123 @@ GROUP BY e.e_id, e.name
 ORDER BY total_tours DESC;
 ```
 
+
+# שלב ה' – מערכת לניהול עובדים, סיורים ותשלומים
+
+מערכת זו נבנתה כחלק מפרויקט קורס במסדי נתונים ומשלבת ממשק משתמש ב-Python עם חיבור למסד PostgreSQL, המאפשר ניהול עובדים, סיורים, תלושי שכר ודוחות תשלום בצורה גרפית, אינטראקטיבית ונוחה.
+
+---
+
+## הוראות הפעלה
+
+1. ודא שמותקן:
+   - Python 3.10 ומעלה
+   - PostgreSQL פעיל עם החיבורים הבאים:
+     - host: localhost
+     - port: 5433
+     - dbname: stage5
+     - user: postgres
+     - password: 16040010
+
+2. הפעל את הקובץ:
+   ```bash
+   python opening_screen.py
+   ```
+
+3. יוצג סרטון פתיחה. לאחריו יופיע המסך הראשי הכולל כפתורים לגישה ל-4 המסכים:
+
+   - ניהול עובדים – employee.py
+   - סיכום תשלומים – summary_screen.py
+   - מדריכים עם ניסיון – guides_experience_screen.py
+   - גרף מדריכים – compare_visitors_guides.py
+
+---
+
+## הכלים שבהם השתמשנו
+
+- Python – שפת הפיתוח
+- Tkinter – לבניית הממשק הגרפי
+- psycopg2 – חיבור למסד PostgreSQL
+- PostgreSQL – מסד נתונים רלציוני
+- Matplotlib – להצגת גרפים
+- OpenCV – לניגון סרטון פתיחה
+
+---
+
+## תמונות מסך
+
+| מסך | קישור |
+|-----|-------|
+| מסך פתיחה | ![opening_screen](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/opening_screen.png) |
+| תפריט ראשי | ![selection_screen](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/selection_screen.png) |
+| ניהול עובדים | ![employee](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/employee_management.png) |
+| ניהול תלושי שכר | ![salary](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/salary_reports.png) |
+| דוח סיכום | ![summary](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/summary_reports.png) |
+| מדריכים עם ניסיון | ![experience](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/experienced_guides.png) |
+| השוואת מדריכים | ![compare](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/guide_comparison.png) |
+
+---
+
+## שאילתות, פונקציות וטריגרים
+
+### employee.py
+```sql
+SELECT * FROM employee;
+INSERT INTO employee (e_id, e_name, employee_role) VALUES (%s, %s, %s);
+UPDATE employee SET e_name = %s WHERE e_id = %s;
+DELETE FROM employee WHERE e_id = %s;
+```
+
+### SalaryManager.py
+```sql
+SELECT payslip_number, neto_salary, payslip_date FROM salary WHERE e_id = %s;
+DELETE FROM salary WHERE payslip_number = %s;
+```
+
+### TourManagerApp.py
+```sql
+SELECT tourid, price * amount AS total FROM tour WHERE guideid = %s;
+DELETE FROM tour WHERE tourid = %s;
+```
+
+### summary_screen.py
+```sql
+CALL pr_generate_payment_summary();
+SELECT emp_id, total_amount, report_date FROM summary_report;
+```
+
+### guides_experience_screen.py
+```sql
+SELECT * FROM fn_guides_with_experience(min_tours);
+```
+
+### compare_visitors_guides.py
+```sql
+SELECT v.visitorid, v.name, COUNT(b.bookingid) AS num_bookings
+FROM visitor v JOIN booking b ON v.visitorid = b.visitorid
+GROUP BY v.visitorid, v.name;
+```
+
+### פונקציות שהוגדרו במסד הנתונים
+```sql
+CREATE OR REPLACE FUNCTION fn_total_payment_for_guide(guide_id INT) RETURNS refcursor ...
+CREATE OR REPLACE FUNCTION fn_guides_with_experience(min_tours INT) RETURNS TABLE ...
+```
+
+### פרוצדורות במסד
+```sql
+CALL pr_update_employee_role(employee_id, new_role);
+CALL pr_generate_payment_summary();
+```
+
+### טריגרים במסד
+```sql
+CREATE TRIGGER trg_before_payment_insert BEFORE INSERT ON salary FOR EACH ROW EXECUTE FUNCTION check_employee_exists();
+CREATE TRIGGER trg_after_payment_insert AFTER INSERT ON salary FOR EACH ROW EXECUTE FUNCTION update_summary_report();
+```
+
+---
+
+## סיכום
+
+המערכת כוללת תפריט ראשי אחיד המפנה לכל רכיבי הניהול: עובדים, סיורים, שכר ודוחות. כל רכיב בנוי כמסך עצמאי הקשור למסד PostgreSQL עם תמיכה ב־CRUD מלא, שאילתות מתקדמות וגרפים להצגת מידע.

@@ -940,8 +940,12 @@ $$;
 ### ניהול עובדים  
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/employee_management.png)
 
-### ניהול תלושי שכר  
-![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/salary_reports.png)
+### ניהול תלושי שכר עבור עובד 
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/manager_salary.png)
+
+### ניהול טיולים עבוד עובד
+
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/tour_manager.png)
 
 ### דוח סיכום תשלומים  
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/summary_reports.png)

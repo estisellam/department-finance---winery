@@ -22,7 +22,7 @@
 7. [שלב ב – שאילתות ועדכונים](#דוח-פרויקט--שלב-ב)
 8. [שלב ג- אינטגרציה ומבטים](#דוח-פרויקט--שלב-ג)
 9. [שלב ד- תכנות](#דוח-פרויקט--שלב-ד)
-
+10. [שלב ה- ממשק גרפי](#שלב-ה-–-מערכת-לניהול-עובדים-סיורים-ותשלומים)
 
 
 ---
@@ -863,45 +863,17 @@ $$;
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%94%D7%95%D7%9B%D7%97%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%202.png)
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%AA%D7%95%D7%A6%D7%90%D7%95%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%202.png)
 
-# דוח פרויקט - שלב ה
-
-```sql
-SELECT 
-    v.visitorid,
-    v.name,
-    COUNT(b.booking) AS total_bookings
-FROM visitor v
-NATURAL JOIN visitor_account
-NATURAL JOIN booking b
-GROUP BY v.visitorid, v.name
-ORDER BY total_bookings DESC;
-```
-
-```sql
-SELECT 
-    e.e_id,
-    e.name,
-    COUNT(t.tourid) AS total_tours,
-    ROUND(AVG(t.price), 2) AS avg_price
-FROM employee e
-NATURAL JOIN tour t
-WHERE e.role = 'guide'
-GROUP BY e.e_id, e.name
-ORDER BY total_tours DESC;
-```
-
-
 # שלב ה' – מערכת לניהול עובדים, סיורים ותשלומים
 
-מערכת זו נבנתה כחלק מפרויקט קורס במסדי נתונים ומשלבת ממשק משתמש ב-Python עם חיבור למסד PostgreSQL, המאפשר ניהול עובדים, סיורים, תלושי שכר ודוחות תשלום בצורה גרפית, אינטראקטיבית ונוחה.
+מערכת זו נבנתה בשפת Python עם חיבור למסד PostgreSQL. המערכת מאפשרת ניהול עובדים, סיורים, תלושי שכר ודוחות סיכום באופן גרפי ואינטראקטיבי.
 
 ---
 
-## הוראות הפעלה
+## הוראות הפעלה של האפליקציה
 
-1. ודא שמותקן:
-   - Python 3.10 ומעלה
-   - PostgreSQL פעיל עם החיבורים הבאים:
+1. ודא שהמערכת עומדת בדרישות הבאות:
+   - מותקן Python 3.10+
+   - מסד PostgreSQL פעיל עם:
      - host: localhost
      - port: 5433
      - dbname: stage5
@@ -909,104 +881,110 @@ ORDER BY total_tours DESC;
      - password: 16040010
 
 2. הפעל את הקובץ:
-   ```bash
+   ```
    python opening_screen.py
    ```
 
-3. יוצג סרטון פתיחה. לאחריו יופיע המסך הראשי הכולל כפתורים לגישה ל-4 המסכים:
-
-   - ניהול עובדים – employee.py
-   - סיכום תשלומים – summary_screen.py
-   - מדריכים עם ניסיון – guides_experience_screen.py
-   - גרף מדריכים – compare_visitors_guides.py
+3. יוצג סרטון פתיחה. ניתן ללחוץ "דלג" או להמתין לסיומו. לאחר מכן יוצג המסך הראשי של המערכת.
 
 ---
 
-## הכלים שבהם השתמשנו
+## מבנה המסכים והמעברים
 
-- Python – שפת הפיתוח
-- Tkinter – לבניית הממשק הגרפי
-- psycopg2 – חיבור למסד PostgreSQL
-- PostgreSQL – מסד נתונים רלציוני
-- Matplotlib – להצגת גרפים
-- OpenCV – לניגון סרטון פתיחה
+### 1. opening_screen.py – מסך פתיחה
+- מציג סרטון וידאו במסך מלא.
+- כפתור “דלג” מאפשר מעבר מהיר.
+- בסיום הסרטון מוצג המסך הראשי של המערכת (Landing Page).
+
+### המסך הראשי של המערכת (נמצא בתוך opening_screen.py)
+
+מרכז הניווט של המערכת – מכיל 4 כפתורים עיקריים:
+
+#### ניהול עובדים (employee.py)
+- טבלת עובדים: ת”ז, שם, תפקיד.
+- פעולות: הוספה, עדכון, מחיקה.
+- לכל עובד כפתורים:
+  - ניהול תלושים (SalaryManager.py)
+  - ניהול סיורים (TourManagerApp.py)
+
+#### סיכום תשלומים (summary_screen.py)
+- מפעיל את הפרוצדורה `pr_generate_payment_summary`
+- מציג את תוכן הטבלה `summary_report`
+
+#### מדריכים עם ניסיון (guides_experience_screen.py)
+- מקבל מהמשתמש מספר סיורים מינימלי
+- מציג מדריכים עם ניסיון מעל ערך זה
+- משתמש בפונקציה `fn_guides_with_experience`
+
+#### גרף השוואתי בין מדריכים (compare_visitors_guides.py)
+- מבצע חישוב כמות משתתפים לפי מדריך
+- מציג גרף באמצעות matplotlib
+- נגיש מהתפריט הראשי
+
+---
+
+## מסכים פנימיים שנפתחים מתוך employee.py
+
+### SalaryManager.py – ניהול תלושי שכר
+- מציג תלושים לעובד נבחר
+- פעולות: הוספה, עדכון, מחיקה
+- כולל יצוא לקובץ Excel
+
+### TourManagerApp.py – ניהול סיורים
+- מציג את הסיורים של המדריך
+- פעולות: הוספה, עדכון, מחיקה
+- מחשב סך הכנסות לכל סיור
 
 ---
 
 ## תמונות מסך
 
-| מסך | קישור |
-|-----|-------|
-| מסך פתיחה | ![opening_screen](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/opening_screen.png) |
-| תפריט ראשי | ![selection_screen](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/selection_screen.png) |
-| ניהול עובדים | ![employee](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/employee_management.png) |
-| ניהול תלושי שכר | ![salary](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/salary_reports.png) |
-| דוח סיכום | ![summary](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/summary_reports.png) |
-| מדריכים עם ניסיון | ![experience](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/experienced_guides.png) |
-| השוואת מדריכים | ![compare](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%2520%D7%94/guide_comparison.png) |
+### מסך פתיחה  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/opening_screen.png)
 
----
+### תפריט ראשי  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/selection_screen.png)
 
-## שאילתות, פונקציות וטריגרים
+### ניהול עובדים  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/employee_management.png)
+
+### ניהול תלושי שכר  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/salary_reports.png)
+
+### דוח סיכום תשלומים  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/summary_reports.png)
+
+### מדריכים עם ניסיון  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/experienced_guides.png)
+
+### גרף השוואת מדריכים  
+![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%94/guide_comparison.png)
+
+## שאילתות, פרוצדורות ופונקציות בשימוש בפועל
 
 ### employee.py
-```sql
-SELECT * FROM employee;
-INSERT INTO employee (e_id, e_name, employee_role) VALUES (%s, %s, %s);
-UPDATE employee SET e_name = %s WHERE e_id = %s;
-DELETE FROM employee WHERE e_id = %s;
-```
+- SELECT * FROM employee;
+- INSERT INTO employee (...);
+- UPDATE employee SET ...;
+- DELETE FROM employee WHERE ...;
 
 ### SalaryManager.py
-```sql
-SELECT payslip_number, neto_salary, payslip_date FROM salary WHERE e_id = %s;
-DELETE FROM salary WHERE payslip_number = %s;
-```
+- SELECT payslip_number, neto_salary, payslip_date FROM salary WHERE e_id = %s;
+- DELETE FROM salary WHERE payslip_number = %s;
 
 ### TourManagerApp.py
-```sql
-SELECT tourid, price * amount AS total FROM tour WHERE guideid = %s;
-DELETE FROM tour WHERE tourid = %s;
-```
+- SELECT tourid, price * amount AS total FROM tour WHERE guideid = %s;
+- DELETE FROM tour WHERE tourid = %s;
 
 ### summary_screen.py
-```sql
-CALL pr_generate_payment_summary();
-SELECT emp_id, total_amount, report_date FROM summary_report;
-```
+- CALL pr_generate_payment_summary();
+- SELECT * FROM summary_report;
 
 ### guides_experience_screen.py
-```sql
-SELECT * FROM fn_guides_with_experience(min_tours);
-```
-
-### compare_visitors_guides.py
-```sql
-SELECT v.visitorid, v.name, COUNT(b.bookingid) AS num_bookings
-FROM visitor v JOIN booking b ON v.visitorid = b.visitorid
-GROUP BY v.visitorid, v.name;
-```
-
-### פונקציות שהוגדרו במסד הנתונים
-```sql
-CREATE OR REPLACE FUNCTION fn_total_payment_for_guide(guide_id INT) RETURNS refcursor ...
-CREATE OR REPLACE FUNCTION fn_guides_with_experience(min_tours INT) RETURNS TABLE ...
-```
-
-### פרוצדורות במסד
-```sql
-CALL pr_update_employee_role(employee_id, new_role);
-CALL pr_generate_payment_summary();
-```
-
-### טריגרים במסד
-```sql
-CREATE TRIGGER trg_before_payment_insert BEFORE INSERT ON salary FOR EACH ROW EXECUTE FUNCTION check_employee_exists();
-CREATE TRIGGER trg_after_payment_insert AFTER INSERT ON salary FOR EACH ROW EXECUTE FUNCTION update_summary_report();
-```
+- SELECT * FROM fn_guides_with_experience(min_tours);
 
 ---
 
 ## סיכום
 
-המערכת כוללת תפריט ראשי אחיד המפנה לכל רכיבי הניהול: עובדים, סיורים, שכר ודוחות. כל רכיב בנוי כמסך עצמאי הקשור למסד PostgreSQL עם תמיכה ב־CRUD מלא, שאילתות מתקדמות וגרפים להצגת מידע.
+לאחר הצגת הסרטון, מוצג תפריט ראשי שמרכז את כל הרכיבים: ניהול עובדים, תלושים, סיורים ודוחות. כל כפתור פותח ממשק עצמאי, המחובר למסד הנתונים ומאפשר עבודה מלאה עם הנתונים בהתאם לצורך.

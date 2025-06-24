@@ -862,7 +862,7 @@ $$;
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%94%D7%95%D7%9B%D7%97%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%202.png)
 ![](https://github.com/estisellam/department-finance---winery/blob/main/DBProject/%D7%A9%D7%9C%D7%91%20%D7%93/%D7%AA%D7%95%D7%A6%D7%90%D7%95%D7%AA%20%D7%A8%D7%99%D7%A6%D7%94%20%D7%AA%D7%95%D7%9B%D7%A0%D7%99%D7%AA%202.png)
 
-# שלב ה' – מערכת לניהול עובדים, סיורים ותשלומים
+##שלב ה מערכת לניהול עובדים סיורים ותשלומים
 
 מערכת זו נבנתה בשפת Python עם חיבור למסד PostgreSQL. המערכת מאפשרת ניהול עובדים, סיורים, תלושי שכר ודוחות סיכום באופן גרפי ואינטראקטיבי.
 
